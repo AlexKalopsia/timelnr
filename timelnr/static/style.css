@@ -1,0 +1,82 @@
+body {
+  background-color: #dcdcdc !important;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+p {
+  font-family: "Roboto", sans-serif;
+  color: #424243;
+  text-align: justify;
+}
+
+a,
+a:hover,
+a:visited,
+a:active,
+a:link {
+  color: #72a68b;
+  text-decoration: none;
+}
+
+#header {
+  display: block;
+  text-align: center;
+}
+
+.timeline-bar {
+  background: #9c9c9c;
+  width: 2px;
+  height: 25px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.entry {
+  text-align: center;
+  background: #f9f3f3;
+  border-radius: 0px;
+}
+.entry p {
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  color: #424242;
+  margin-top: 5px;
+  text-align: center;
+  min-height: 35px;
+}
+
+.entry-img {
+  width: 100%;
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+}
+
+.entry-date {
+  text-align: center;
+  color: #ffffff;
+  background: #72a68b;
+  height: 40px;
+}
+.entry-date h1 {
+  font-family: "Oswald", sans-serif;
+  font-size: 18px;
+  height: 18px;
+  margin-top: 10px;
+}
+
+.entry-label h1 {
+  font-family: "Oswald", sans-serif;
+  font-size: 18px;
+  height: 18px;
+  margin-top: 10px;
+  color: #ffffff;
+}
+
+.mgspo .entry {
+  border-top: 1px dashed #c4c4c4;
+  border-left: 1px dashed #c4c4c4;
+  border-bottom: 1px dashed #c4c4c4;
+}

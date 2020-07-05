@@ -1,10 +1,20 @@
-from flask import render_template
+from flask import redirect, render_template, url_for
 from timelnr import app, db
+from timelnr.config import langs, label_colors
+
+
+@app.route("/timeline")
+def timeline():
+    return render_template('timeline.html')
 
 
 @app.route("/")
-@app.route("/home")
-def home():
+def root():
+    return redirect(url_for('home', curr_lang='en'))
+
+
+@app.route("/<string:curr_lang>")
+def home(curr_lang):
     with db.connect() as connection:
         result = connection.execute(
             "SELECT `mgt_entries`.* FROM `mgt_entries`;")
@@ -13,23 +23,15 @@ def home():
             entry = {
                 'id': row['mgtID'],
                 'year': row['mgtYear'],
-                'event': {
-                    'en': row['mgtEvent_en'],
-                    'it': row['mgtEvent_it'],
-                    'fr': row['mgtEvent_fr'],
-                    'de': row['mgtEvent_de'],
-                    'es': row['mgtEvent_es'],
-                    'ru': row['mgtEvent_ru'],
-                    'nl': row['mgtEvent_nl'],
-                    'br': row['mgtEvent_br'],
-                    'ch': row['mgtEvent_ch'],
-                    'pl': row['mgtEvent_pl'],
-                    'lb': row['mgtEvent_lb']
-                },
+                'event': {key: row['mgtEvent_' + key] for (key, value) in langs.items()},
                 'game': row['mgtGame'],
                 'source': row['mgtSource'],
                 'image': row['mgtImg'],
-                'color': row['mgtColor']
+                'label': {
+                    'slug': row['mgtColor'],
+                    'color': label_colors.get(row['mgtColor']),
+                    'name': row['mgtGame']
+                }
             }
             entries.append(entry)
-    return render_template('base.html', entries=entries)
+    return render_template('timeline.html', entries=entries, curr_lang=curr_lang, langs=langs, colors=label_colors)
