@@ -21,6 +21,7 @@
 
             <!-- Label -->
             {% if entry.game != '' %}
+            <a id="{{ entry.label.slug }}" class="anchor" style="top:-100px; position: relative;"></a>
             <div class="col-md-1 entry-label {{ entry.label.slug }}-label">
                 <h1>{{ entry.label.name }}</h1>
             </div>

@@ -15,17 +15,17 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
     <style>
         :root {
-            {% for label in colors %}
-                --{{label}}: {{colors[label]}} ;           
+            {% for label in labels %}
+                --{{label.slug}}: {{label.color}} ;           
             {% endfor %}
         }
 
-        {% for label in colors %}
-        .{{label}}{
-            border-right: 6px solid var(--{{label}});
+        {% for label in labels %}
+        .{{label.slug}}{
+            border-right: 6px solid var(--{{label.slug}});
         }
-        .{{label}}-label{
-            background-color: var(--{{label}});
+        .{{label.slug}}-label{
+            background-color: var(--{{label.slug}});
             height: 40px;
         }
         {% endfor %}
@@ -44,50 +44,65 @@
     {% if title %}
     <title>Timelnr - {{ title }}</title>
     {% else %}
-    <title>Timelnr - MetalGearTimmmmmeline</title>
+    <title>Timelnr - MetalGearTimeline</title>
     {% endif %}
 </head>
 
 <body>
-    <div>
-        <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
-            <a class="navbar-brand mr-auto mr-lg-0" href="#">Offcanvas navbar</a>
-            <button class="navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+        <nav class="navbar bg-dark navbar-dark navbar-expand-sm fixed-top">
+            <a class="navbar-brand" href=""><img style="max-width: 100px;" src="{{ url_for('static', filename='images/mgt_logo_xs.png') }}"></a>
+            <a class="nav-item nav-link" href="#">Timeline</a>
+            <div class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Games</a>
+                <div class="dropdown-menu" aria-labelledby="dropdown01">
+                {% for label in labels %}
+                    <a class="dropdown-item" href="#{{ label.slug }}">{{ label.name }}</a>
+                {% endfor %}
+                </div>
+            </div>
+            <a class="nav-link nav-item ml-auto" href="#">About MGT</a>
+            <a class="nav-link" href="#contribute"><b>♥ DONATE</b></a>
+            <a class="nav-link" href="#sources">Sources</a>
+            <a class="nav-link" href="#credits">Credits</a>
+            <a class="nav-link" href="#press">Press</a>
+        </nav>
+
+        <!--<nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+            <a class="navbar-brand mr-auto mr-lg-0" href="#"><img style="max-width:100px; margin-left: 5px;" src="{{ url_for('static', filename='images/mgt_logo_xs.png') }}"></a>
 
             <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
                 <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Dashboard <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Notifications</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Profile</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Switch account</a>
+                    <a class="nav-link" href="#">Timeline</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="https://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Settings</a>
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Games</a>
                     <div class="dropdown-menu" aria-labelledby="dropdown01">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
+                    {% for label in labels %}
+                        <a class="dropdown-item" href="{{ url_for('home', curr_lang=lang )}}">{{ label.name }}</a>
+                    {% endfor %}
                     </div>
                 </li>
+                <li class="nav-item ml-auto">
+                    <a class="nav-link" href="#">About MGT</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#contribute"><b>♥ DONATE</b></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#sources">Sources</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#credits">Credits</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#press">Press</a>
+                </li>
                 </ul>
-                <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </form>
             </div>
-        </nav>
-    </div>
+        </nav>-->
 
-        <div style="padding-top: 60px"  class="nav-scroller bg-white shadow-sm">
+        <!--<div style="padding-top: 80px"  class="nav-scroller bg-white shadow-sm">
             <nav class="nav nav-underline">
                 {% for lang in langs %}
                     {% if curr_lang == lang %}
@@ -97,18 +112,32 @@
                     {% endif %}
                 {% endfor %}
             </nav>
-        </div>
-        
+        </div>-->
+
         <main role="main" class="container no-padding">
 
         <!-- HEADER -->
-        <div class="row">
-            <div id="header" class="col-6 mx-auto text-center">
+        <div class="row mt-5">
+            <div id="header" class="col-6 mx-auto text-center mt-5 mb-3">
                 <img class="img-fluid d-block" src="{{ url_for('static', filename='images/mgt_logo.png') }}">
             </div>
         </div>
 
         <!-- LANGUAGES -->
+
+        <div class="row d-flex justify-content-center mb-4">
+            <div class="dropdown show">
+                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Language
+                </a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    {% for lang in langs %}
+                        <a class="nav-link active" href="{{ url_for('home', curr_lang=lang )}}">{{ langs[lang] }}</a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
         <!--<ul class="nav justify-content-center">
             {% for lang in langs %}
                 <li class="nav-item">
@@ -127,13 +156,7 @@
 
     </main>
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 </body>

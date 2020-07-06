@@ -1,6 +1,6 @@
 from flask import redirect, render_template, url_for
 from timelnr import app, db
-from timelnr.config import langs, label_colors
+from timelnr.config import langs, labels, label_colors
 
 
 @app.route("/timeline")
@@ -34,4 +34,4 @@ def home(curr_lang):
                 }
             }
             entries.append(entry)
-    return render_template('timeline.html', entries=entries, curr_lang=curr_lang, langs=langs, colors=label_colors)
+    return render_template('timeline.html', entries=entries, curr_lang=curr_lang, langs=langs, labels=labels)
