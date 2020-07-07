@@ -4,6 +4,7 @@ body {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  font-size: 15px !important;
 }
 
 p {
@@ -13,12 +14,15 @@ p {
 }
 
 a,
-a:hover,
 a:visited,
 a:active,
 a:link {
-  color: #72a68b;
-  text-decoration: none;
+  color: #72a68b !important;
+  text-decoration: none !important;
+}
+
+a:hover {
+  color: #5b8e74 !important;
 }
 
 #header {
@@ -79,4 +83,15 @@ a:link {
   border-top: 1px dashed #c4c4c4;
   border-left: 1px dashed #c4c4c4;
   border-bottom: 1px dashed #c4c4c4;
+}
+/*232323*/
+.btn-primary,
+.btn-primary:active,
+.btn-primary:focus {
+  background-color: #72a68b !important;
+  border-color: #72a68b !important;
+}
+
+.btn-primary:hover {
+  background-color: #5b8e74 !important;
 }
