@@ -51,7 +51,7 @@
 <body>
         <nav class="navbar bg-dark navbar-dark navbar-expand-sm fixed-top">
             <a class="navbar-brand" href=""><img style="max-width: 100px;" src="{{ url_for('static', filename='images/mgt_logo_xs.png') }}"></a>
-            <a class="nav-item nav-link" href="#">Timeline</a>
+            <a class="nav-item nav-link d-none d-sm-block" href="#">Timeline</a>
             <div class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Games</a>
                 <div class="dropdown-menu" aria-labelledby="dropdown01">
@@ -60,24 +60,32 @@
                 {% endfor %}
                 </div>
             </div>
-            <a class="nav-link nav-item ml-auto" href="#about">About MGT</a>
-            <a class="nav-link" href="#contribute"><b>♥ DONATE</b></a>
-            <a class="nav-link" href="#sources">Sources</a>
-            <a class="nav-link" href="#credits">Credits</a>
-            <a class="nav-link" href="#press">Press</a>
+            <div class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Language</a>
+                <div class="dropdown-menu" aria-labelledby="dropdown01">
+                {% for lang in langs %}
+                    <a class="nav-link active" href="{{ url_for('home', curr_lang=lang )}}">{{ langs[lang] }}</a>
+                {% endfor %}
+                </div>
+            </div>
+            <a class="nav-link nav-item ml-auto d-none d-sm-block" href="#about">About MGT</a>
+            <a class="nav-link d-none d-sm-block" href="#contribute"><b>♥ DONATE</b></a>
+            <a class="nav-link d-none d-sm-block" href="#sources">Sources</a>
+            <a class="nav-link d-none d-sm-block" href="#credits">Credits</a>
+            <a class="nav-link d-none d-sm-block" href="#press">Press</a>
         </nav>
 
         <main role="main" class="container">
 
             <!-- HEADER -->
             <div class="row mt-5">
-                <div id="header" class="col-6 mx-auto text-center mt-5 mb-3">
+                <div id="header" class="col-12 col-md-6 mx-auto text-center mt-5 mb-3">
                     <img class="img-fluid d-block" src="{{ url_for('static', filename='images/mgt_logo.png') }}">
                 </div>
             </div>
 
             <!-- LANGUAGES -->
-
+            <!--
             <div class="row justify-content-center mb-4">
                 <div class="dropdown show">
                     <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -90,6 +98,7 @@
                     </div>
                 </div>
             </div>
+            -->
 
             <!-- ENTRIES -->
             {% block timeline %}{% endblock %}

@@ -1,0 +1,7 @@
+Flask==1.1.2
+Flask-SQLAlchemy==2.4.3
+Jinja2==2.11.2
+py==1.8.1
+PyMySQL==0.9.3
+requests==2.23.0
+SQLAlchemy==1.3.17
