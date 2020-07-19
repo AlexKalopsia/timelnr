@@ -17,12 +17,22 @@ a,
 a:visited,
 a:active,
 a:link {
-  color: #72a68b !important;
+  color: #72a68b;
   text-decoration: none !important;
 }
 
 a:hover {
   color: #5b8e74 !important;
+}
+
+.btn-success {
+  background-color: #72a68b !important;
+  border-color: #72a68b !important;
+}
+
+#donate-btn a,
+#donate-btn a:hover {
+  color: #fff !important;
 }
 
 #header {
