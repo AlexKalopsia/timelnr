@@ -93,10 +93,10 @@ a:hover {
   color: #ffffff;
 }
 
-.mgspo .entry {
-  border-top: 1px dashed #c4c4c4;
-  border-left: 1px dashed #c4c4c4;
-  border-bottom: 1px dashed #c4c4c4;
+.entry.mgspo {
+  border-top: 1px dashed #c4c4c4 !important;
+  border-left: 1px dashed #c4c4c4 !important;
+  border-bottom: 1px dashed #c4c4c4 !important;
 }
 /*232323*/
 .btn-primary,
@@ -110,17 +110,34 @@ a:hover {
   background-color: #5b8e74 !important;
 }
 
+.hidebuttons {
+  position: fixed;
+  right: 0px;
+  margin-right: 0px;
+  bottom: 10px;
+  height: 60px;
+  z-index: 9999999;
+}
+.hidebuttons > button {
+  color: #ffffff !important;
+  margin-bottom: 4px !important;
+}
+
 .quicknav {
   position: fixed;
   right: 0px;
   margin-right: 0px;
-  bottom: 100px;
-  height: 200px;
+  bottom: 80px;
+  height: 320px;
   z-index: 9999999;
 }
 
 .quicknav a {
-  color: #ffffff;
+  color: #ffffff !important;
+}
+.quicknav a:hover {
+  color: #ffffff !important;
+  text-decoration: underline !important;
 }
 
 .quicknav-box > span {

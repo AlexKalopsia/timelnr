@@ -89,12 +89,16 @@
             <!--<button id="button-mgsv" type="button" class="btn btn-success btn-sm">Hide MGSV</button>
             <button id="button-canon" type="button" class="btn btn-success btn-sm">Hide uncertain canon</button>
             -->
-            <div class="quicknav">
+            <div class="quicknav">    
                     <a href="#"><div class="quicknav-box" style="background: #72a68b; width: 60px; margin-left: 40px;"><span>&#708;</span></div></a>           
                     {% for label in labels %}
-                        <a href="#{{ label.slug }}"><div class="quicknav-box" style="background: {{ label.color }};"><span>{{ label.name }}</span></div></a>          
+                        <a href="#{{ label.slug }}"><div class="quicknav-box {{ label.slug }}" style="background: {{ label.color }};"><span>{{ label.name }}</span></div></a>          
                     {% endfor %}
                     <a href="#credits"><div class="quicknav-box" style="background: #72a68b; width: 60px; margin-left: 40px;"><span>&#709;</span></div></a>
+            </div>
+            <div class="hidebuttons">
+                <button class="quicknav-box" id="button-canon" style="background: #232323; width: 140px; border: 0px;"><span>Hide uncetrian canon</span></button></br>
+                <button class="quicknav-box" id="button-mgsv" style="background: #232323; width: 140px; border: 0px;"><span>Hide MGSV</span></button>     
             </div>
         </div>
 
@@ -252,9 +256,8 @@
 
     </main>
 
-    <script src="{{ url_for('static', filename='js/functions.js') }}"></script>	
-
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <script src="{{ url_for('static', filename='js/functions.js') }}"></script>	
 </body>
