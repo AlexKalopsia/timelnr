@@ -7,7 +7,8 @@ config = Config()
 
 app.config.from_object(config)
 
-db = create_engine(config.SQLALCHEMY_DATABASE_URI)
+db = create_engine(config.SQLALCHEMY_DATABASE_URI,
+                   pool_pre_ping=True, pool_recycle=3600)
 
 
 # Imported here to avoid circular import

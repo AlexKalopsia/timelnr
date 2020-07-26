@@ -105,3 +105,27 @@ a:hover {
 .btn-primary:hover {
   background-color: #5b8e74 !important;
 }
+
+.quicknav {
+  position: fixed;
+  right: 0px;
+  margin-right: 0px;
+  bottom: 100px;
+  height: 200px;
+  z-index: 9999999;
+}
+
+.quicknav a {
+  color: #ffffff;
+}
+
+.quicknav-box > span {
+  margin-left: 5px;
+  text-align: left;
+}
+
+.quicknav-box {
+  font-size: 12px;
+  margin-bottom: 4px;
+  width: 100px;
+}

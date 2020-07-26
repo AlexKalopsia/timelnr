@@ -49,198 +49,212 @@
 </head>
 
 <body>
-        <nav class="navbar bg-dark navbar-dark navbar-expand-sm fixed-top">
-            <a class="navbar-brand" href=""><img style="max-width: 100px;" src="{{ url_for('static', filename='images/mgt_logo_xs.png') }}"></a>
-            <a class="nav-item nav-link d-none d-sm-block" href="#">Timeline</a>
-            <div class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Games</a>
-                <div class="dropdown-menu" aria-labelledby="dropdown01">
-                {% for label in labels %}
-                    <a class="dropdown-item" href="#{{ label.slug }}" style="color:{{ label.color }} !important;">{{ label.name }}</a>
-                {% endfor %}
-                </div>
+    <nav class="navbar bg-dark navbar-dark navbar-expand-sm fixed-top">
+        <a class="navbar-brand" href=""><img style="max-width: 100px;" src="{{ url_for('static', filename='images/mgt_logo_xs.png') }}"></a>
+        <a class="nav-item nav-link d-none d-sm-block" href="#">Timeline</a>
+        <div class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle d-lg-none" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Games</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown01">
+            {% for label in labels %}
+                <a class="dropdown-item" href="#{{ label.slug }}" style="color:{{ label.color }} !important;">{{ label.name }}</a>
+            {% endfor %}
             </div>
-            <div class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Language</a>
-                <div class="dropdown-menu" aria-labelledby="dropdown01">
-                {% for lang in langs %}
-                    <a class="nav-link active" href="{{ url_for('home', curr_lang=lang )}}">{{ langs[lang] }}</a>
-                {% endfor %}
-                </div>
+        </div>
+        <div class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Language</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown01">
+            {% for lang in langs %}
+                <a class="nav-link active" href="{{ url_for('home', curr_lang=lang )}}">{{ langs[lang] }}</a>
+            {% endfor %}
             </div>
-            <a class="nav-link nav-item ml-auto d-none d-sm-block" href="#about">About MGT</a>
-            <a class="nav-link d-none d-sm-block" href="#contribute"><b>♥ DONATE</b></a>
-            <a class="nav-link d-none d-sm-block" href="#sources">Sources</a>
-            <a class="nav-link d-none d-sm-block" href="#credits">Credits</a>
-            <a class="nav-link d-none d-sm-block" href="#press">Press</a>
-        </nav>
+        </div>
+        <a class="nav-link nav-item ml-auto d-none d-md-block" href="#about">About MGT</a>
+        <a class="nav-link d-none d-md-block" href="#contribute"><b>♥ DONATE</b></a>
+        <a class="nav-link d-none d-lg-block" href="#sources">Sources</a>
+        <a class="nav-link d-none d-md-block" href="#credits">Credits</a>
+        <a class="nav-link d-none d-lg-block" href="#press">Press</a>
+    </nav>
 
-        <main role="main" class="container">
+    <main role="main" class="container">
 
-            <!-- HEADER -->
-            <div class="row mt-5">
-                <div id="header" class="col-12 col-md-6 mx-auto text-center mt-5 mb-3">
-                    <img class="img-fluid d-block" src="{{ url_for('static', filename='images/mgt_logo.png') }}">
-                </div>
+        <!-- HEADER -->
+        <div class="row mt-5">
+            <div id="header" class="col-12 col-md-6 mx-auto text-center mt-5 mb-3">
+                <img class="img-fluid d-block" src="{{ url_for('static', filename='images/mgt_logo.png') }}">
             </div>
+        </div>
 
-            <!-- LANGUAGES -->
-            <!--
-            <div class="row justify-content-center mb-4">
-                <div class="dropdown show">
-                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Language
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        {% for lang in langs %}
-                            <a class="nav-link active" href="{{ url_for('home', curr_lang=lang )}}">{{ langs[lang] }}</a>
-                        {% endfor %}
-                    </div>
-                </div>
-            </div>
+        <!-- QUICKNAV -->
+        <div class="d-none d-lg-block">
+            <!--<button id="button-mgsv" type="button" class="btn btn-success btn-sm">Hide MGSV</button>
+            <button id="button-canon" type="button" class="btn btn-success btn-sm">Hide uncertain canon</button>
             -->
+            <div class="quicknav">
+                    <a href="#"><div class="quicknav-box" style="background: #72a68b; width: 60px; margin-left: 40px;"><span>&#708;</span></div></a>           
+                    {% for label in labels %}
+                        <a href="#{{ label.slug }}"><div class="quicknav-box" style="background: {{ label.color }};"><span>{{ label.name }}</span></div></a>          
+                    {% endfor %}
+                    <a href="#mgt"><div class="quicknav-box" style="background: #72a68b; width: 60px; margin-left: 40px;"><span>&#709;</span></div></a>
+            </div>
+        </div>
 
-            <!-- ENTRIES -->
-            {% block timeline %}{% endblock %}
-
-            <!-- ABOUT & CONTRIBUTE-->
-            <div class="row justify-content-center mt-5">
-                <div class="col-lg-6 text-center">
-                    <h2>About the project</h2>
-					<p class="mt-5">I'm <a href="https://twitter.com/AlexKalopsia">Alex</a>, game developer at <a href="https://www.kalopsiagames.com">Kalopsia Games</a> and huge fan of Metal Gear.</br></br>Every time a new Metal Gear is about to be released, I have to reorganize my ideas and memories about the saga, which is usually a tiring task. I started looking for accessible ways to have an overview of the different game events, but I figured out that there was no such a thing.</br></br>
-					I therefore decided to spend <b>some of my spare time</b> creating the Metal Gear Timeline: I hope you will like it and find it useful (whether you're a lover or a hater of the saga).</br></br>
-					Please, <b>consider sharing</b> Metal Gear Timeline on social media, or even contribute to the development of the project.</p>
-		        	</div>
-                <div class="col-lg-4 text-center">
-                    <a name="contribute"></a>
-                    <h2>Contribute</h2>
-                    <p class="mt-5 mb-0">If you wish to support me in the attempt to keep this website updated (and to cover the hosting and development costs), feel free to <b>make a donation</b> by pressing the button above. I will insert your name on the Special Thanks section as a sign of gratitude.</p></br>
-                    <div id="donate-btn">
-                        <a class="btn btn-success mb-4" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=LP2TPMWPLQRJG" role="button">♥ Support this project</a>
-                    </div>
-                    <p>If you have suggestions about the timeline in terms of content, don't hesitate reaching out via <a href="https://twitter.com/AlexKalopsia">Twitter</a> or via <a href="mailto:info@kalopsiagames.com">mail</a>.<br>
+        <!-- LANGUAGES -->
+        <!--
+        <div class="row justify-content-center mb-4">
+            <div class="dropdown show">
+                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Language
+                </a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    {% for lang in langs %}
+                        <a class="nav-link active" href="{{ url_for('home', curr_lang=lang )}}">{{ langs[lang] }}</a>
+                    {% endfor %}
                 </div>
             </div>
+        </div>
+        -->
 
-            <!-- SOURCES & THANKS -->
-            <div class="row mt-5">
-                <!-- SPECIAL THANKS -->
-				<a name="credits"></a>
-				<div class="offset-lg-1 col-lg-6">
-					<h2 class="text-center mb-4">Credits</h2>
-						<h5>Development</h5>
-							<ul>
-								<li><a href="https://twitter.com/AlexKalopsia">Alex Camilleri</a> (Concept, Website, Content)</li>
-								<li>Danny Calleri (Sweet AngularJS support)</li>
-							</ul></br>
-						<h5>Translation</h5>
-							<ul>
-								<li>Brazilian Portuguese - João Vitor, Pedro Caetano de Abreu Teixeira</li>
-								<li>Chinese - <a href="https://steamcommunity.com/id/LoliconFelix/">LoliconFelix</a></li>
-								<li>Dutch - <a href="https://twitter.com/xArcky">Keano Raubun</a></li>
-								<li>French - Elie Glasser, Jordan Guier, <a href="https://wilfriednass.com/">Wilfried Nass</a></li>
-								<li>German - Dennis Lorenz, Philippe Simonis, Tomasz Liskiewicz</li>
-								<li>Luxembourgish - Philippe Simonis</li>
-								<li>Spanish - Armando Salcedo, Israel Chairez Lizcano, Pablo Vecchio, Pedro Teixeira</li>
-								<li>Polish - Bartosz Duszel, Jakub Czerwiński, Karol Buchajczuk</li>
-								<li>Russian - Denis Storonyak, Mark Kostyuk, Ruslan Sliusarenko</li>
-							</ul></br>
-						<h5>Supporters</h5>
-							<ul>
-								<li><b>Everyone who donated:</b> AA Gun, Abdulla Almansoori, Alejandro Martinez, Andrew Calabrese, Arsentiy Korolyov, Balabanov Sergey, Cameron Saemann, Daniel Drexler, Fabian Guldenmann, Gabe Upcott, Jean-Cristophe Suzanne, Jérémie Bertrand, Juan Carlos Gil, Le Deng, Leonardo Gabiati, Leonardo Lambertini, Markus Roth, Maxime Louis, Morten Lauritzen, Ryan Pohlner, Samuel Nussbaumer, Simon Lange, Sven Reuber, Thomas Riant Devillers, Wael Hazzazi, Zal Meher-Homji, Ziad Fawaz</li>
-								<li><a href="https://www.reddit.com/user/AudioRejectz">AudioRejectz</a>, for sparking the idea behind this website</li>
-							</ul></br>
-						<h5>Top Donations</h5>
-							<ol>
-								<li>Tim Hollweg - 50€</li>
-								<li>Le Deng - 25€</li>
-								<li>Alejandro Martinez - 20€</li> <!-- 20 -->
-								<li>Wael Hazzazi - 20€</li>
-								<li><a href="https://unturneditemid.com/">AA Gun</a> - 15€</li> <!-- 15 -->
-							</ol><br><br><br>
-                </div>	
+        <!-- ENTRIES -->
+        {% block timeline %}{% endblock %}
 
-                <a name="sources" class="anchor"></a>
-                <div class="col-lg-4">
-                    <h2 class="text-center mb-4">Sources</h2>
-                    <ul class="small">
-                        <li><p>Kojima Productions (2006). <em>Metal Gear Solid: Portable Ops</em>. [PSP], Japan: Konami</p></li>
-                        <li><p>Kojima Productions (2008). <em>Metal Gear Solid 4: Guns of the Patriots</em>. [PS3], Japan: Konami</p></li>
-                        <li><p>Kojima Productions (2010). <em>Metal Gear Solid: Peace Walker</em>. [PSP], Japan: Konami</p></li>
-                        <li><p>Kojima Productions (2014). <em>Metal Gear Solid V: Ground Zeroes</em>. [PS4], Japan: Konami</p></li>
-                        <li><p>Kojima Productions (2015). <em>Metal Gear Solid V: the Phantom Pain</em>. [PS4], Japan: Konami</p></li>
-                        <li><p>Konami (1987). <em>Metal Gear</em>. [MSX2], Japan: Konami</p></li>
-                        <li><p>Konami (1990). <em>Metal Gear 2: Solid Snake</em>. [MSX2], Japan: Konami</p></li>
-                        <li><p>Konami Computer Entertainment Japan (1998). <em>Metal Gear Solid</em>. [PSX], Japan: Konami</p></li>
-                        <li><p>Konami Computer Entertainment Japan (2001). <em>Metal Gear Solid 2: Sons of Liberty</em>. [PS2], Japan: Konami</p></li>
-                        <li><p>Konami Computer Entertainment Japan (2004). <em>Metal Gear Solid 3: Snake Eater</em>. [PS2], Japan: Konami</p></li>
-                        <li><p>Platinum Games (2012). <em>Metal Gear Rising: Revengeance</em>. [PS3], Japan: Konami</p></li>
-                        <li><p>AudioRejectz (2014). <em>Metal Gear Solid the Complete Story</em>. Retrieved from <a href="https://www.reddit.com/r/Games/comments/2050xm/metal_gear_the_complete_story/">https://www.reddit.com/r/Games/comments/2050xm/-metal_gear_the_complete_story/</a></p></li>
-                        <li><p>jryanm (2014). <em>MGS Portable Ops - Plot Summary</em>. [Blog post]. Retrieved from <a href="https://jryanmvg.wordpress.com/2014/03/06/mgs-portable-ops-plot-summary-2/">https://jryanmvg.wordpress.com/2014/03/06/mgs-portable-ops-plot-summary-2/</a></p></li>
-                        <li><p>Lt. Eddy (2013). <em>MGS Portable Ops Lore in 3 Minutes</em>. [Video file]. Retrieved from <a href="https://www.youtube.com/watch?v=5tgZZ8glTyc">https://www.youtube.com/watch?v=5tgZZ8glTyc</a></p></li>
-                        <li><p>Metal Gear Rising Revengeance - Plot Synopsis. (n.d.). In IGN Wikis. Retrieved from <a href="https://www.ign.com/wikis/metal-gear-rising-revengeance/Plot_Synopsis">https://www.ign.com/wikis/metal-gear-rising-revengeance/Plot_Synopsis</a></li></p>
-                        <li><p>Operation Tecumseh. (n.d.). In Metal Gear Wiki. Retrieved from <a href="https://metalgear.wikia.com/wiki/Operation_Tecumseh">https://metalgear.wikia.com/wiki/Operation_Tecumseh</a></p></li>
-                        <li><p>Peace Walker Incident. (n.d.). In Metal Gear Wiki. Retrieved from <a href="https://metalgear.wikia.com/wiki/Peace_Walker_Incident">https://metalgear.wikia.com/wiki/Peace_Walker_Incident</a></p></li>
-                        <li><p>San Hieronymo Incident. (n.d.). In Metal Gear Wiki. Retrieved from <a href="https://metalgear.wikia.com/wiki/San_Hieronymo_Incident">https://metalgear.wikia.com/wiki/San_Hieronymo_Incident</a></p></li>
-                        <li><p>Shadow Moses Incident. (n.d.). In Metal Gear Wiki. Retrieved from <a href="https://metalgear.wikia.com/wiki/Shadow_Moses_Incident">https://metalgear.wikia.com/wiki/Shadow_Moses_Incident</a></p></li>
-                    </ul>
+        <!-- ABOUT & CONTRIBUTE-->
+        <div class="row justify-content-center mt-5">
+            <div class="col-lg-6 text-center">
+                <h2>About the project</h2>
+                <p class="mt-5">I'm <a href="https://twitter.com/AlexKalopsia">Alex</a>, game developer at <a href="https://www.kalopsiagames.com">Kalopsia Games</a> and huge fan of Metal Gear.</br></br>Every time a new Metal Gear is about to be released, I have to reorganize my ideas and memories about the saga, which is usually a tiring task. I started looking for accessible ways to have an overview of the different game events, but I figured out that there was no such a thing.</br></br>
+                I therefore decided to spend <b>some of my spare time</b> creating the Metal Gear Timeline: I hope you will like it and find it useful (whether you're a lover or a hater of the saga).</br></br>
+                Please, <b>consider sharing</b> Metal Gear Timeline on social media, or even contribute to the development of the project.</p>
                 </div>
-
+            <div class="col-lg-4 text-center">
+                <a name="contribute"></a>
+                <h2>Contribute</h2>
+                <p class="mt-5 mb-0">If you wish to support me in the attempt to keep this website updated (and to cover the hosting and development costs), feel free to <b>make a donation</b> by pressing the button above. I will insert your name on the Special Thanks section as a sign of gratitude.</p></br>
+                <div id="donate-btn">
+                    <a class="btn btn-success mb-4" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=LP2TPMWPLQRJG" role="button">♥ Support this project</a>
+                </div>
+                <p>If you have suggestions about the timeline in terms of content, don't hesitate reaching out via <a href="https://twitter.com/AlexKalopsia">Twitter</a> or via <a href="mailto:info@kalopsiagames.com">mail</a>.<br>
             </div>
-            
-            <div class="row justify-content-center mb-4">
-				<div class="col-lg-12 text-center">
-					<a name="mgt"></a>
-					<h1>Press</h1>
-				</div>
-			</div>
-			<div class="row text-center mb-5">
-				<!-- PRESS -->
-				<a name="press"></a>	
-				    	<div class="col-4 mb-3"><a href="https://www.actugaming.net/news/actualites/un-fan-de-la-saga-metal-gear-cr%C3%A9e-un-site-pour-retracer-lhistoire-r3837">Actu'Gaming (FR)</a></div>
-				    	<div class="col-4 mb-3"><a href="https://www.baixakijogos.com.br/noticias/fa-cria-linha-tempo-detalhada-franquia-metal-gear_813640.htm">Baixaki Games (BR)</a></div>
-				    	<div class="col-4 mb-3"><a href="images/edge.jpg">EDGE</a></div>
-						<div class="col-4 mb-3"><a href="https://www.egmnow.com/articles/news/get-caught-up-on-metal-gear-solids-story-with-this-simple-fan-made-timeline/">EGM Now</a></div>
-						<div class="col-4 mb-3"><a href="https://www.eurogamer.it/articles/2015-08-17-news-videogiochi-un-sito-prepara-i-giocatori-allarrivo-di-metal-gear-solid-5-the-phantom-pain">Eurogamer (IT)</a></div>
-						<div class="col-4 mb-3"><a href="https://www.eurogamer.pt/articles/2015-08-16-vejam-esta-imprescindivel-linha-do-tempo-de-metal-gear">Eurogamer (PT)</a></div>
-						<div class="col-4 mb-3"><a href="https://www.forbes.com/sites/olliebarder/2015/08/20/metal-gear-solid-v-the-phantom-pain-to-reveal-the-biggest-mystery-in-the-series/">Forbes</a></div>
-						<div class="col-4 mb-3"><a href="https://www.fz.se/artiklar/nyheter/20150816/djuplodande-helglasning-med-hela-metal-gears-tidslinje">FZ (SE)</a></div>
-						<div class="col-4 mb-3"><a href="https://www.gameblog.fr/news/52928-perdu-avant-mgs-5-voici-les-dates-et-la-chronologie-de-toute">GameBlog (FR)</a></div>
-						<div class="col-4 mb-3"><a href="https://gamehall.uol.com.br/v10/fa-cria-site-com-resumo-detalhado-de-toda-a-historia-da-saga-metal-gear/">GameHall (BR)</a></div>
-						<div class="col-4 mb-3"><a href="https://www.gamelegends.it/metal-gear-timeline-un-ripasso-di-tutti-gli-eventi-della-famosa-saga/">GameLegends (IT)</a></div>
-						<div class="col-4 mb-3"><a href="https://gamingbolt.com/metal-gear-solid-5-the-phantom-pain-fans-should-visit-this-archival-site-before-they-boot-up-the-game">GamingBolt</a></div>
-						<div class="col-4 mb-3"><a href="https://www.gamnesia.com/news/a-fan-has-put-together-a-chronological-telling-of-the-metal-gear-storyline">Gamnesia</a></div>
-						<div class="col-4 mb-3"><a href="https://www.giantbomb.com/podcasts/giant-bombcast-08252015/1600-1329/">GiantBombcast (17:00)</a></div>
-						<div class="col-4 mb-3"><a href="https://gunsandpixels.com/2015/09/metal-gear-timeline-qa-with-alex-camilleri/">Guns & Pixels</a></div>
-						<div class="col-4 mb-3"><a href="https://it.ign.com/metal-gear-solid-5-ps4/100893/news/ripassiamo-gli-eventi-della-saga-di-metal-gear-con">IGN (IT)</a></div>
-						<div class="col-4 mb-3"><a href="https://jagatplay.com/2015/08/news/cara-mudah-memahami-timeline-cerita-metal-gear-solid/">JagatPlay (ID)</a></div>
-						<div class="col-4 mb-3"><a href="https://www.jeuxcapt.com/Metal-Gear-Solid-V--The-Phantom-Pain---Toute-la-timeline-de-la-serie-creee-par-un-fan-et-en-francais--actualite-27836.html">JeuxCapt (FR)</a></div>
-						<div class="col-4 mb-3"><a href="https://www.jeuxvideo.com/news/440379/perdu-dans-l-histoire-metal-gear-la-timeline-est-disponible.htm">JeuxVideo (FR)</a></div>
-						<div class="col-4 mb-3"><a href="https://kotaku.com/we-ve-already-seen-the-official-metal-gear-timeline-wh-1738228576">Kotaku</a></div>
-						<div class="col-4 mb-3"><a href="https://www.levelup.com/noticias/335689/Mira-esta-util-linea-del-tiempo-de-Metal-Gear">LevelUp (SP)</a></div>
-						<div class="col-4 mb-3"><a href="https://www.metalgearnews.fr/un-fan-de-metal-gear-cree-un-site-retracant-la-saga/">MetalGearNews (FR)</a></div>
-						<div class="col-4 mb-3"><a href="https://metalgearplanet.it/news/archivio/2015/08/timeline-di-metal-gear">MetalGearPlanet (IT)</a></div>
-						<div class="col-4 mb-3"><a href="https://www.mondoxbox.com/news/51430/a-digiuno-di-mgs-ma-volete-prendere-mgs-v-the-phantom-pain-ecco-il-sito-che-fa-per-voi.html">MondoXbox (IT)</a></div>	
-						<div class="col-4 mb-3"><a href="https://nichegamer.com/2015/08/the-metal-gear-timeline-website-might-refresh-you-on-the-series-insane-storyline/">Nichegamer</a></div>
-						<div class="col-4 mb-3"><a href="https://www.onpsx.de/news.php?id=46103">Onpsx (DE)</a></div>
-						<div class="col-4 mb-3"><a href="https://www.opengeek.it/gaming/metal-gear-timeline-tutto-sul-progetto/">OpenGeek (IT)</a></div>
-						<div class="col-4 mb-3"><a href="https://www.pcgamer.com/how-to-become-a-metal-gear-expert-before-the-phantom-pain-comes-out/">PC Gamer</a></div>
-						<div class="col-4 mb-3"><a href="https://segmentnext.com/2015/08/15/metal-gear-timeline-preps-newcomers-for-metal-gear-solid-v-the-phantom-pain/">SegmentNext</a></div>
-						<div class="col-4 mb-3"><a href="https://www.siliconera.com/2015/08/14/metal-gear-timeline-puts-all-of-the-series-events-in-order/">Siliconera</a></div>
-						<div class="col-4 mb-3"><a href="https://www.vg247.com/2015/08/27/entire-metal-gear-solid-timeline-on-one-website/">VG247</a></div>
-						<div class="col-4 mb-3"><a href="https://www.vg247.it/2015/08/17/metal-gear-solid-v-un-appassionato-crea-una-timeline-che-espone-tutti-gli-eventi-prima-di-the-phantom-pain/">VG247 (IT)</a></div>
-			</div>
-			<div class="row text-center">
-				<div class="col-lg-12 privacy mb-4">
-					<p>© 2015-2021 Alex Camilleri. Metal Gear Timeline is a fan project, not affiliated with Konami Digital Entertainment Co. "METAL GEAR SOLID” is a registered trademark of Konami Digital Entertainment Co., Ltd. KONAMI is a registered trademark of KONAMI CORPORATION.</p>
-				</div>
-			</div>
+        </div>
 
+        <!-- SOURCES & THANKS -->
+        <div class="row mt-5">
+            <!-- SPECIAL THANKS -->
+            <a name="credits"></a>
+            <div class="offset-lg-1 col-lg-6">
+                <h2 class="text-center mb-4">Credits</h2>
+                    <h5>Development</h5>
+                        <ul>
+                            <li><a href="https://twitter.com/AlexKalopsia">Alex Camilleri</a> (Concept, Website, Content)</li>
+                            <li>Danny Calleri (Sweet AngularJS support)</li>
+                        </ul></br>
+                    <h5>Translation</h5>
+                        <ul>
+                            <li>Brazilian Portuguese - João Vitor, Pedro Caetano de Abreu Teixeira</li>
+                            <li>Chinese - <a href="https://steamcommunity.com/id/LoliconFelix/">LoliconFelix</a></li>
+                            <li>Dutch - <a href="https://twitter.com/xArcky">Keano Raubun</a></li>
+                            <li>French - Elie Glasser, Jordan Guier, <a href="https://wilfriednass.com/">Wilfried Nass</a></li>
+                            <li>German - Dennis Lorenz, Philippe Simonis, Tomasz Liskiewicz</li>
+                            <li>Luxembourgish - Philippe Simonis</li>
+                            <li>Spanish - Armando Salcedo, Israel Chairez Lizcano, Pablo Vecchio, Pedro Teixeira</li>
+                            <li>Polish - Bartosz Duszel, Jakub Czerwiński, Karol Buchajczuk</li>
+                            <li>Russian - Denis Storonyak, Mark Kostyuk, Ruslan Sliusarenko</li>
+                        </ul></br>
+                    <h5>Supporters</h5>
+                        <ul>
+                            <li><b>Everyone who donated:</b> AA Gun, Abdulla Almansoori, Alejandro Martinez, Andrew Calabrese, Arsentiy Korolyov, Balabanov Sergey, Cameron Saemann, Daniel Drexler, Fabian Guldenmann, Gabe Upcott, Jean-Cristophe Suzanne, Jérémie Bertrand, Juan Carlos Gil, Le Deng, Leonardo Gabiati, Leonardo Lambertini, Markus Roth, Maxime Louis, Morten Lauritzen, Ryan Pohlner, Samuel Nussbaumer, Simon Lange, Sven Reuber, Thomas Riant Devillers, Wael Hazzazi, Zal Meher-Homji, Ziad Fawaz</li>
+                            <li><a href="https://www.reddit.com/user/AudioRejectz">AudioRejectz</a>, for sparking the idea behind this website</li>
+                        </ul></br>
+                    <h5>Top Donations</h5>
+                        <ol>
+                            <li>Tim Hollweg - 50€</li>
+                            <li>Le Deng - 25€</li>
+                            <li>Alejandro Martinez - 20€</li> <!-- 20 -->
+                            <li>Wael Hazzazi - 20€</li>
+                            <li><a href="https://unturneditemid.com/">AA Gun</a> - 15€</li> <!-- 15 -->
+                        </ol><br><br><br>
+            </div>	
+
+            <a name="sources" class="anchor"></a>
+            <div class="col-lg-4">
+                <h2 class="text-center mb-4">Sources</h2>
+                <ul class="small">
+                    <li><p>Kojima Productions (2006). <em>Metal Gear Solid: Portable Ops</em>. [PSP], Japan: Konami</p></li>
+                    <li><p>Kojima Productions (2008). <em>Metal Gear Solid 4: Guns of the Patriots</em>. [PS3], Japan: Konami</p></li>
+                    <li><p>Kojima Productions (2010). <em>Metal Gear Solid: Peace Walker</em>. [PSP], Japan: Konami</p></li>
+                    <li><p>Kojima Productions (2014). <em>Metal Gear Solid V: Ground Zeroes</em>. [PS4], Japan: Konami</p></li>
+                    <li><p>Kojima Productions (2015). <em>Metal Gear Solid V: the Phantom Pain</em>. [PS4], Japan: Konami</p></li>
+                    <li><p>Konami (1987). <em>Metal Gear</em>. [MSX2], Japan: Konami</p></li>
+                    <li><p>Konami (1990). <em>Metal Gear 2: Solid Snake</em>. [MSX2], Japan: Konami</p></li>
+                    <li><p>Konami Computer Entertainment Japan (1998). <em>Metal Gear Solid</em>. [PSX], Japan: Konami</p></li>
+                    <li><p>Konami Computer Entertainment Japan (2001). <em>Metal Gear Solid 2: Sons of Liberty</em>. [PS2], Japan: Konami</p></li>
+                    <li><p>Konami Computer Entertainment Japan (2004). <em>Metal Gear Solid 3: Snake Eater</em>. [PS2], Japan: Konami</p></li>
+                    <li><p>Platinum Games (2012). <em>Metal Gear Rising: Revengeance</em>. [PS3], Japan: Konami</p></li>
+                    <li><p>AudioRejectz (2014). <em>Metal Gear Solid the Complete Story</em>. Retrieved from <a href="https://www.reddit.com/r/Games/comments/2050xm/metal_gear_the_complete_story/">https://www.reddit.com/r/Games/comments/2050xm/-metal_gear_the_complete_story/</a></p></li>
+                    <li><p>jryanm (2014). <em>MGS Portable Ops - Plot Summary</em>. [Blog post]. Retrieved from <a href="https://jryanmvg.wordpress.com/2014/03/06/mgs-portable-ops-plot-summary-2/">https://jryanmvg.wordpress.com/2014/03/06/mgs-portable-ops-plot-summary-2/</a></p></li>
+                    <li><p>Lt. Eddy (2013). <em>MGS Portable Ops Lore in 3 Minutes</em>. [Video file]. Retrieved from <a href="https://www.youtube.com/watch?v=5tgZZ8glTyc">https://www.youtube.com/watch?v=5tgZZ8glTyc</a></p></li>
+                    <li><p>Metal Gear Rising Revengeance - Plot Synopsis. (n.d.). In IGN Wikis. Retrieved from <a href="https://www.ign.com/wikis/metal-gear-rising-revengeance/Plot_Synopsis">https://www.ign.com/wikis/metal-gear-rising-revengeance/Plot_Synopsis</a></li></p>
+                    <li><p>Operation Tecumseh. (n.d.). In Metal Gear Wiki. Retrieved from <a href="https://metalgear.wikia.com/wiki/Operation_Tecumseh">https://metalgear.wikia.com/wiki/Operation_Tecumseh</a></p></li>
+                    <li><p>Peace Walker Incident. (n.d.). In Metal Gear Wiki. Retrieved from <a href="https://metalgear.wikia.com/wiki/Peace_Walker_Incident">https://metalgear.wikia.com/wiki/Peace_Walker_Incident</a></p></li>
+                    <li><p>San Hieronymo Incident. (n.d.). In Metal Gear Wiki. Retrieved from <a href="https://metalgear.wikia.com/wiki/San_Hieronymo_Incident">https://metalgear.wikia.com/wiki/San_Hieronymo_Incident</a></p></li>
+                    <li><p>Shadow Moses Incident. (n.d.). In Metal Gear Wiki. Retrieved from <a href="https://metalgear.wikia.com/wiki/Shadow_Moses_Incident">https://metalgear.wikia.com/wiki/Shadow_Moses_Incident</a></p></li>
+                </ul>
+            </div>
+
+        </div>
         
+        <div class="row justify-content-center mb-4">
+            <div class="col-lg-12 text-center">
+                <a name="mgt"></a>
+                <h1>Press</h1>
+            </div>
+        </div>
+        <div class="row text-center mb-5">
+            <!-- PRESS -->
+            <a name="press"></a>	
+                    <div class="col-4 mb-3"><a href="https://www.actugaming.net/news/actualites/un-fan-de-la-saga-metal-gear-cr%C3%A9e-un-site-pour-retracer-lhistoire-r3837">Actu'Gaming (FR)</a></div>
+                    <div class="col-4 mb-3"><a href="https://www.baixakijogos.com.br/noticias/fa-cria-linha-tempo-detalhada-franquia-metal-gear_813640.htm">Baixaki Games (BR)</a></div>
+                    <div class="col-4 mb-3"><a href="images/edge.jpg">EDGE</a></div>
+                    <div class="col-4 mb-3"><a href="https://www.egmnow.com/articles/news/get-caught-up-on-metal-gear-solids-story-with-this-simple-fan-made-timeline/">EGM Now</a></div>
+                    <div class="col-4 mb-3"><a href="https://www.eurogamer.it/articles/2015-08-17-news-videogiochi-un-sito-prepara-i-giocatori-allarrivo-di-metal-gear-solid-5-the-phantom-pain">Eurogamer (IT)</a></div>
+                    <div class="col-4 mb-3"><a href="https://www.eurogamer.pt/articles/2015-08-16-vejam-esta-imprescindivel-linha-do-tempo-de-metal-gear">Eurogamer (PT)</a></div>
+                    <div class="col-4 mb-3"><a href="https://www.forbes.com/sites/olliebarder/2015/08/20/metal-gear-solid-v-the-phantom-pain-to-reveal-the-biggest-mystery-in-the-series/">Forbes</a></div>
+                    <div class="col-4 mb-3"><a href="https://www.fz.se/artiklar/nyheter/20150816/djuplodande-helglasning-med-hela-metal-gears-tidslinje">FZ (SE)</a></div>
+                    <div class="col-4 mb-3"><a href="https://www.gameblog.fr/news/52928-perdu-avant-mgs-5-voici-les-dates-et-la-chronologie-de-toute">GameBlog (FR)</a></div>
+                    <div class="col-4 mb-3"><a href="https://gamehall.uol.com.br/v10/fa-cria-site-com-resumo-detalhado-de-toda-a-historia-da-saga-metal-gear/">GameHall (BR)</a></div>
+                    <div class="col-4 mb-3"><a href="https://www.gamelegends.it/metal-gear-timeline-un-ripasso-di-tutti-gli-eventi-della-famosa-saga/">GameLegends (IT)</a></div>
+                    <div class="col-4 mb-3"><a href="https://gamingbolt.com/metal-gear-solid-5-the-phantom-pain-fans-should-visit-this-archival-site-before-they-boot-up-the-game">GamingBolt</a></div>
+                    <div class="col-4 mb-3"><a href="https://www.gamnesia.com/news/a-fan-has-put-together-a-chronological-telling-of-the-metal-gear-storyline">Gamnesia</a></div>
+                    <div class="col-4 mb-3"><a href="https://www.giantbomb.com/podcasts/giant-bombcast-08252015/1600-1329/">GiantBombcast (17:00)</a></div>
+                    <div class="col-4 mb-3"><a href="https://gunsandpixels.com/2015/09/metal-gear-timeline-qa-with-alex-camilleri/">Guns & Pixels</a></div>
+                    <div class="col-4 mb-3"><a href="https://it.ign.com/metal-gear-solid-5-ps4/100893/news/ripassiamo-gli-eventi-della-saga-di-metal-gear-con">IGN (IT)</a></div>
+                    <div class="col-4 mb-3"><a href="https://jagatplay.com/2015/08/news/cara-mudah-memahami-timeline-cerita-metal-gear-solid/">JagatPlay (ID)</a></div>
+                    <div class="col-4 mb-3"><a href="https://www.jeuxcapt.com/Metal-Gear-Solid-V--The-Phantom-Pain---Toute-la-timeline-de-la-serie-creee-par-un-fan-et-en-francais--actualite-27836.html">JeuxCapt (FR)</a></div>
+                    <div class="col-4 mb-3"><a href="https://www.jeuxvideo.com/news/440379/perdu-dans-l-histoire-metal-gear-la-timeline-est-disponible.htm">JeuxVideo (FR)</a></div>
+                    <div class="col-4 mb-3"><a href="https://kotaku.com/we-ve-already-seen-the-official-metal-gear-timeline-wh-1738228576">Kotaku</a></div>
+                    <div class="col-4 mb-3"><a href="https://www.levelup.com/noticias/335689/Mira-esta-util-linea-del-tiempo-de-Metal-Gear">LevelUp (SP)</a></div>
+                    <div class="col-4 mb-3"><a href="https://www.metalgearnews.fr/un-fan-de-metal-gear-cree-un-site-retracant-la-saga/">MetalGearNews (FR)</a></div>
+                    <div class="col-4 mb-3"><a href="https://metalgearplanet.it/news/archivio/2015/08/timeline-di-metal-gear">MetalGearPlanet (IT)</a></div>
+                    <div class="col-4 mb-3"><a href="https://www.mondoxbox.com/news/51430/a-digiuno-di-mgs-ma-volete-prendere-mgs-v-the-phantom-pain-ecco-il-sito-che-fa-per-voi.html">MondoXbox (IT)</a></div>	
+                    <div class="col-4 mb-3"><a href="https://nichegamer.com/2015/08/the-metal-gear-timeline-website-might-refresh-you-on-the-series-insane-storyline/">Nichegamer</a></div>
+                    <div class="col-4 mb-3"><a href="https://www.onpsx.de/news.php?id=46103">Onpsx (DE)</a></div>
+                    <div class="col-4 mb-3"><a href="https://www.opengeek.it/gaming/metal-gear-timeline-tutto-sul-progetto/">OpenGeek (IT)</a></div>
+                    <div class="col-4 mb-3"><a href="https://www.pcgamer.com/how-to-become-a-metal-gear-expert-before-the-phantom-pain-comes-out/">PC Gamer</a></div>
+                    <div class="col-4 mb-3"><a href="https://segmentnext.com/2015/08/15/metal-gear-timeline-preps-newcomers-for-metal-gear-solid-v-the-phantom-pain/">SegmentNext</a></div>
+                    <div class="col-4 mb-3"><a href="https://www.siliconera.com/2015/08/14/metal-gear-timeline-puts-all-of-the-series-events-in-order/">Siliconera</a></div>
+                    <div class="col-4 mb-3"><a href="https://www.vg247.com/2015/08/27/entire-metal-gear-solid-timeline-on-one-website/">VG247</a></div>
+                    <div class="col-4 mb-3"><a href="https://www.vg247.it/2015/08/17/metal-gear-solid-v-un-appassionato-crea-una-timeline-che-espone-tutti-gli-eventi-prima-di-the-phantom-pain/">VG247 (IT)</a></div>
+        </div>
+        <div class="row text-center">
+            <small class="col-lg-12 privacy mb-4">
+                <p>© 2015-2021 Alex Camilleri. Metal Gear Timeline is a fan project, not affiliated with Konami Digital Entertainment Co. "METAL GEAR SOLID” is a registered trademark of Konami Digital Entertainment Co., Ltd. KONAMI is a registered trademark of KONAMI CORPORATION.</p>
+            </small>
+        </div>
 
     </main>
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <script src="{{ url_for('static', filename='js/functions.js') }}"></script>	
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 </body>
