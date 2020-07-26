@@ -25,6 +25,10 @@ a:hover {
   color: #5b8e74 !important;
 }
 
+.mgt-navbar {
+  background-color: #232323 !important;
+}
+
 .btn-success {
   background-color: #72a68b !important;
   border-color: #72a68b !important;
