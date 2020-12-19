@@ -10,9 +10,8 @@ $(document).ready(function () {
         ? "Hide uncertain canon"
         : "Show everything";
     });
-    $(".mgspo").slideToggle(250);
+    $(".mgspo-group").slideToggle(250);
     $(".d-md-block.mgspo-label").slideToggle(250);
-    $("#quicknav-box.mgspo").slideToggle(250);
     //$('.mgr').slideToggle(250);
   });
 
@@ -22,9 +21,7 @@ $(document).ready(function () {
     $(this).text(function (i, text) {
       return text === "Show MGSV" ? "Hide MGSV" : "Show MGSV";
     });
-    $(".mgsv").slideToggle(250);
-    $(".from-mgsv").slideToggle(250);
-    $("#quicknav-mgsv").slideToggle(250);
+    $(".mgsv-group").slideToggle(250);
     //$('.mgr').slideToggle(250);
   });
 

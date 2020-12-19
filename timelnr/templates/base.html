@@ -44,7 +44,7 @@
     {% if title %}
     <title>Timelnr - {{ title }}</title>
     {% else %}
-    <title>Timelnr - MetalGearTimeline</title>
+    <title>Metal Gear Timeline</title>
     {% endif %}
 </head>
 
@@ -92,7 +92,7 @@
             <div class="quicknav">    
                     <a href="#"><div class="quicknav-box" style="background: #72a68b; width: 60px; margin-left: 40px;"><span>&#708;</span></div></a>           
                     {% for label in labels %}
-                        <a href="#{{ label.slug }}"><div class="quicknav-box {{ label.slug }}" style="background: {{ label.color }};"><span>{{ label.name }}</span></div></a>          
+                        <a href="#{{ label.slug }}"><div class="quicknav-box {{ label.slug }} {{ label.slug }}-group" style="background: {{ label.color }};"><span>{{ label.name }}</span></div></a>          
                     {% endfor %}
                     <a href="#credits"><div class="quicknav-box" style="background: #72a68b; width: 60px; margin-left: 40px;"><span>&#709;</span></div></a>
             </div>
@@ -160,6 +160,7 @@
                             <li>German - Dennis Lorenz, Philippe Simonis, Tomasz Liskiewicz</li>
                             <li>Luxembourgish - Philippe Simonis</li>
                             <li>Spanish - Armando Salcedo, Israel Chairez Lizcano, Pablo Vecchio, Pedro Teixeira</li>
+                            <li>Persian - Sina Hosseini</li>
                             <li>Polish - Bartosz Duszel, Jakub Czerwiński, Karol Buchajczuk</li>
                             <li>Russian - Denis Storonyak, Mark Kostyuk, Ruslan Sliusarenko</li>
                         </ul></br>

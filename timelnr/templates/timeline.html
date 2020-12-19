@@ -1,64 +1,67 @@
 {% extends "base.html" %}
 
 {% block timeline %}
-    {% for entry in entries %}
-        <div class="row">
+{% for entry in entries %}
+<div class="row">
 
-            <!-- Label Above Year (only on xs and sm screens) -->
-            {% if entry.game != '' %}
-            <a id="{{ entry.label.slug }}" class="anchor" style="top:-100px; position: relative;"></a>
-            <div class="d-md-none col-12 col-md-1 entry-label text-center {{ entry.label.slug }}-label">
-                <h1>{{ entry.label.name }}</h1>
-            </div>
-            {% endif %}
-        
-            <!-- Year -->
-            {% if entry.year != '' %}
-                <div class="col-12 col-md-2 col-lg-1 offset-lg-1 entry-date">
-                    <h1>{{ entry.year }}</h1>
-                </div>
-            {% else %}
-                <div class="col-md-1 offset-md-1 offset-lg-1">
-                </div> 
-            {% endif %}
-
-            <!-- Event -->
-            <div class="col-12 col-md-8 entry {{ entry.label.slug }}">
-                {% if entry.event.get(curr_lang) != '' %}
-                    <p>{{ entry.event.get(curr_lang) }}</p>
-                {% else %}
-                    <p>{{ entry.event.get('en') }}</p>
-                {% endif %}
-            </div>
-
-            <!-- Label On the right side (for lg+ screens) -->
-            {% if entry.game != '' %}
-            <a id="{{ entry.label.slug }}" class="anchor" style="top:-100px; position: relative;"></a>
-            <div class="d-none d-md-block col-12 col-md-2 col-lg-1 entry-label {{ entry.label.slug }}-label">
-                <h1>{{ entry.label.name }}</h1>
-            </div>
-            {% endif %}
-        </div> 
-
-        <!-- Image -->
-        {% if entry.image != '' %}
-            <div class="row">
-                <div class="col-12 col-md-8 offset-md-2 entry-img text-center {{ entry.label.slug }}">
-                    <img class="img-fluid d-block" src="{{ url_for('static', filename='images/' + entry.image) }}">
-                </div>
-            </div>
-        {% endif %}
-        </div> 
-        <!-- Connector -->
-        <div class="row">
-                <div class="timeline-bar"></div>
-        </div> 
-    {% endfor %}
-    <div class="row">
-        <div class="col-8 offset-md-2 entry">
-            <p>The end</p>
-            <a name="about"></a>
-            <a name="contribute"></a>
-        </div>
+    <!-- Label Above Year (only on xs and sm screens) -->
+    {% if entry.game != '' %}
+    <a id="{{ entry.label.slug }}" class="anchor" style="top:-100px; position: relative;"></a>
+    <div
+        class="d-md-none col-12 col-md-1 entry-label text-center {{ entry.label.slug }}-label {{ entry.label.slug }}-group">
+        <h1>{{ entry.label.name }}</h1>
     </div>
+    {% endif %}
+
+    <!-- Year -->
+    {% if entry.year != '' %}
+    <div class="col-12 col-md-2 col-lg-1 offset-lg-1 entry-date {{ entry.label.slug }}-group">
+        <h1>{{ entry.year }}</h1>
+    </div>
+    {% else %}
+    <div class="col-md-1 offset-md-1 offset-lg-1 {{ entry.label.slug }}-group">
+    </div>
+    {% endif %}
+
+    <!-- Event -->
+    <div class="col-12 col-md-8 entry {{ entry.label.slug }} {{ entry.label.slug }}-group">
+        {% if entry.event.get(curr_lang) != '' %}
+        <p>{{ entry.event.get(curr_lang) }}</p>
+        {% else %}
+        <p>{{ entry.event.get('en') }}</p>
+        {% endif %}
+    </div>
+
+    <!-- Label On the right side (for lg+ screens) -->
+    {% if entry.game != '' %}
+    <a id="{{ entry.label.slug }}" class="anchor {{ entry.label.slug }}-group"
+        style="top:-100px; position: relative;"></a>
+    <div
+        class="d-none d-md-block col-12 col-md-2 col-lg-1 entry-label {{ entry.label.slug }}-label {{ entry.label.slug }}-group">
+        <h1>{{ entry.label.name }}</h1>
+    </div>
+    {% endif %}
+</div>
+
+<!-- Image -->
+{% if entry.image != '' %}
+<div class="row">
+    <div class="col-12 col-md-8 offset-md-2 entry-img text-center {{ entry.label.slug }} {{ entry.label.slug }}-group">
+        <img class="img-fluid d-block" src="{{ url_for('static', filename='images/' + entry.image) }}">
+    </div>
+</div>
+{% endif %}
+</div>
+<!-- Connector -->
+<div class="row">
+    <div class="timeline-bar {{ entry.label.slug }}-group"></div>
+</div>
+{% endfor %}
+<div class="row">
+    <div class="col-8 offset-md-2 entry">
+        <p>The end</p>
+        <a name="about"></a>
+        <a name="contribute"></a>
+    </div>
+</div>
 {% endblock timeline %}
