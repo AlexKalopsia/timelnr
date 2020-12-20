@@ -25,6 +25,11 @@ a:hover {
   color: #5b8e74 !important;
 }
 
+a.anchor {
+  position: relative;
+  top: -100px;
+}
+
 .mgt-navbar {
   background-color: #232323 !important;
 }
