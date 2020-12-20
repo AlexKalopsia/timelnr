@@ -1,4 +1,5 @@
-timelnr/static/images/
+timelnr/static/images/*
+!timelnr/static/images/IMAGES_GO_HERE
 test.py
 
 # Byte-compiled / optimized / DLL files

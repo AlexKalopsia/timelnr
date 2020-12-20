@@ -1,5 +1,5 @@
 #!/bin/bash
-app="timelnr"
+app="mgt"
 docker build -t ${app} .
 docker run -d -p 56733:80 \
   --name=${app} \
