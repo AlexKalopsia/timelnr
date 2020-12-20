@@ -25,9 +25,13 @@
     <!-- Event -->
     <div class="col-12 col-md-8 entry {{ entry.label.slug }}">
         {% if entry.event.get(curr_lang) != '' %}
-        <p>{{ entry.event.get(curr_lang) }}</p>
+            {% if curr_lang == 'fa' %}
+                <p style="direction: rtl !important;">{{ entry.event.get(curr_lang) }}</p>
+            {% else %}
+                <p>{{ entry.event.get(curr_lang) }}</p>
+            {% endif %}
         {% else %}
-        <p>{{ entry.event.get('en') }}</p>
+            <p>{{ entry.event.get('en') }}</p>
         {% endif %}
     </div>
 
