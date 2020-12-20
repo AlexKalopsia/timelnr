@@ -72,7 +72,7 @@ def createTable():
                      mysql_charset='utf8mb4'
                      )
     for lang in langs:
-        timeline.append_column(Column('mgtEntry_' + lang, String(900)))
+        timeline.append_column(Column('mgtEvent_' + lang, String(900)))
     metadata.create_all(db)
     return timeline
 
