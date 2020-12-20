@@ -1,6 +1,8 @@
 timelnr/static/images/*
 !timelnr/static/images/IMAGES_GO_HERE
 test.py
+credentials.json
+token.pickle
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
