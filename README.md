@@ -26,16 +26,13 @@ All the data is pulled from a Google Sheet with the following structure:
 
 IMPORTANT: The first entry under every language column needs to be the relative language code (refer to [this list](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes))
 
-### Get your Google API credentials
+### Pull the data from the Google Sheet
 
 1. Go on the [Google Developer Console](https://console.developers.google.com)
 2. Create a project and generate a OAuth 2.0 Client ID
 3. Download the credentials as JSON file
 4. Store the JSON file in the project root
-
-### Pull the data from the Google Sheet
-
-- Simply run `py importer.py`
+5. Simply run `py importer.py`
 
 NOTE: `importer.py` pulls data from the translation sheet via the Google API. To do this it relies on the dev credentials stored in `credentials.json` (which is not committed to the repo). The file can be re-downloaded from the dev dashboard.
 
