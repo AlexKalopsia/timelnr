@@ -1,5 +1,6 @@
-from timelnr.models import Label
+# INSERT YOUR DATA AND RENAME THIS FILE TO config.py 
 
+from timelnr.models import Label
 
 class Config:
     DB_HOST = 'YOUR_DATABASE_HOST'
@@ -13,7 +14,7 @@ class Config:
     SPREADSHEET_RANGE = 'YOUR_GOOGLESHEET_RANGE' #EXAMPLE: 'Sheet1!A1:V234'
 
 
-# REMOVE UNUSED LANGUAGES OR ADD NEW ONES
+# Unused languages should be removed
 langs = {
     'en': 'English',
     'it': 'Italiano',
