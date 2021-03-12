@@ -16,13 +16,13 @@ All the data is pulled from a Google Sheet with the following structure:
 | 3   | 2012 | MGS4 | mgs4  |        | mgs4.png       |     | Snake is dead      | Muore Snake    | ... |
 | ... | ...  | ...  | ...   | ...    | ...            | ... | ...                | ...            | ... |
 
-ID: entry ID. Must be unique
-YEAR: the year when a specific timeline entry happened
-GAME: title of the game. Should be used only for the first entry belonging to the game
-COLOR: css class defined in 'timelnr/config.py'
-SOURCE: unused. Refers to the game that is source of that information
-IMG: name of the image relative to the entry. Stored in `timelnr/static/images/`
-VID: unused. link to a YouTube video related to the entry
+- ID: entry ID. Must be unique
+- YEAR: the year when a specific timeline entry happened
+- GAME: title of the game. Should be used only for the first entry belonging to the game
+- COLOR: css class defined in 'timelnr/config.py'
+- SOURCE: unused. Refers to the game that is source of that information
+- IMG: name of the image relative to the entry. Stored in `timelnr/static/images/`
+- VID: unused. link to a YouTube video related to the entry
 
 IMPORTANT: The first entry under every language column needs to be the relative language code (refer to [this list](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes))
 
