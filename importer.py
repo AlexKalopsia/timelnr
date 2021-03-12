@@ -1,21 +1,19 @@
 from __future__ import print_function
 import pickle
 import os.path
-from googleapiclient.discovery import build
-from google_auth_oauthlib.flow import InstalledAppFlow
-from google.auth.transport.requests import Request
 from timelnr import db, config
 from timelnr.config import langs
 
+from googleapiclient.discovery import build
+from google_auth_oauthlib.flow import InstalledAppFlow
+from google.auth.transport.requests import Request
 from sqlalchemy import Column, Integer, MetaData, String, Table
+
+# Importer.py fetches the timeline multilanguage data from 
+# an external google sheet, and stores the data in a MySQL database
 
 # If modifying these scopes, delete the file token.pickle.
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly']
-
-# The ID and range of a sample spreadsheet.
-SAMPLE_SPREADSHEET_ID = '1j0TOhkauHv_E3xzWseriABLFGmYSQ0c0kGoNgx_d3Xo'
-SAMPLE_RANGE_NAME = 'Sheet1!A1:V234'
-
 
 def getDataFromSheet():
     """Shows basic usage of the Sheets API.
@@ -45,8 +43,8 @@ def getDataFromSheet():
     # Call the Sheets API
     sheet = service.spreadsheets()
 
-    result = sheet.values().get(spreadsheetId=SAMPLE_SPREADSHEET_ID,
-                                range=SAMPLE_RANGE_NAME).execute()
+    result = sheet.values().get(spreadsheetId=config.SPREADSHEET_ID,
+                                range=config.SPREADSHEET_RANGE).execute()
     values = result.get('values', [])
     return values
 
@@ -55,12 +53,16 @@ metadata = MetaData()
 
 
 def createTable():
-    """Create the table by dynamically looking at the langs"""
+    """Create the database table by dynamically looking 
+    at the langs defined in the timelnr config file"""
+
     metadata.clear()
 
+    # Wipe table
     with db.connect() as connection:
         connection.execute('DROP TABLE IF EXISTS `' + config.DB_TABLE + '`')
 
+    # Prepare table
     timeline = Table(config.DB_TABLE, metadata,
                      Column('mgtID', Integer, primary_key=True),
                      Column('mgtYear', String(4)),
@@ -76,23 +78,19 @@ def createTable():
     metadata.create_all(db)
     return timeline
 
-
-tl = createTable()
-
-
-def populateTable():
+def populateTable(timeline):
     """Add all data to the timeline db"""
 
     values = getDataFromSheet()
     langCodes = values[1][7:]
     with db.connect() as connection:
         for value in values[2:]:
-            connection.execute(tl.insert().values(value))
+            connection.execute(timeline.insert().values(value))
 
 
 def main():
-    createTable()
-    populateTable()
+    tl = createTable()
+    populateTable(tl)
 
 
 if __name__ == '__main__':
