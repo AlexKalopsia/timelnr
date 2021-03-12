@@ -62,12 +62,10 @@ def createTable():
 
     metadata.clear()
 
-    # Wipe table
     with db.connect() as connection:
         print('Wiping existing table...')
         connection.execute('DROP TABLE IF EXISTS `' + config.DB_TABLE + '`')
 
-    # Prepare table
     print('Preparing table...')
     timeline = Table(config.DB_TABLE, metadata,
                      Column('mgtID', Integer, primary_key=True),
