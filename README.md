@@ -26,29 +26,37 @@ All the data is pulled from a Google Sheet with the following structure:
 
 IMPORTANT: The first entry under every language column needs to be the relative language code (refer to [this list](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes))
 
+### Get your Google API credentials
+
+1. Go on the [Google Developer Console](https://console.developers.google.com)
+2. Create a project and generate a OAuth 2.0 Client ID
+3. Download the credentials as JSON file
+4. Store the JSON file in the project root
+
+### Pull the data from the Google Sheet
+
+- Simply run `py importer.py`
+
+NOTE: `importer.py` pulls data from the translation sheet via the Google API. To do this it relies on the dev credentials stored in `credentials.json` (which is not committed to the repo). The file can be re-downloaded from the dev dashboard.
+
 ### Run the timeline
 
 1. Setup a MySQL database, and set the credentials in 'timelnr/config.py'
-2. Run `start.sh` to build the Docker image
-3. Execute `docker start mgt` to get the container up and running on your server
+2. Run `start.sh` to build the Docker image and let it run on your server
 
 ### Update the timeline entries
 
-1. Edit the entries
+1. Edit the entries inside the Google Sheet
 2. Run `py importer.py` to rebuild the database
 
 ### Add new language
 
-- Make sure that the relative Sheet column has the right language code
-- Make sure `config.py` contains the new language. Currently the order needs to match the one in the Sheet.
-- Run `py imorter.py`. This will recreate the SQL database
-- Rebuild docker image with `sh start.sh`
+1. Make sure that the relative Sheet column has the right language code
+2. Make sure `config.py` contains the new language. Currently the order needs to match the one in the Sheet.
+3. Run `py imorter.py`. This will recreate the SQL database
+4. Rebuild docker image with `sh start.sh`
 
 ### Change styling
 
-- Edit files
-- Restart the Docker container `mgt` container
-
-### Extra info
-
-- `importer.py` pulls data from the translation sheet via the Google API. To do this it relies on the dev credentials stored in `credentials.json` (which is not committed to the repo). The file can be re-downloaded from the dev dashboard.
+1. Edit the files you want to change
+2. Restart the Docker container with `docker restart mgt`
