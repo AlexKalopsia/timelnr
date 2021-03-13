@@ -29,9 +29,9 @@ Open 'timelnr/config.py' to configure Timelnr:
 
 ## Sheet structure
 
-> **_IMPORTANT:_** The sheet structure can be changed, as long as the data ranges defined in `timelnr/config.py` are correct.
-
 In the sheet there should be three pages: Entries (the content of the timeline), Languages (list of supported languages) and Labels (management and styling).
+
+> **_IMPORTANT:_** The sheet structure can be changed, as long as the data ranges defined in `timelnr/config.py` are correct.
 
 The Entries page normally has the following structure:
 
@@ -51,7 +51,7 @@ The Entries page normally has the following structure:
 - **IMG**: name of the image relative to the entry. Stored in `timelnr/static/images/`
 - **VID**: unused. link to a YouTube video related to the entry
 
-IMPORTANT: The first entry under every language column needs to be the relative language code (refer to [this list](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)), which should also match the one defined in the Languages page.
+> **_IMPORTANT:_** The first entry under every language column needs to be the relative language code (refer to [this list](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)), which should also match the one defined in the Languages page.
 
 ## How to
 
@@ -63,7 +63,7 @@ IMPORTANT: The first entry under every language column needs to be the relative 
 4. Store the JSON file in the project root
 5. Simply run `py importer.py`
 
-NOTE: `importer.py` pulls data from the translation sheet via the Google API. To do this it relies on the dev credentials stored in `credentials.json` (which is not included in the repo). The file can be re-downloaded from your developer console.
+> **_NOTE:_** `importer.py` pulls data from the translation sheet via the Google API. To do this it relies on the dev credentials stored in `credentials.json` (which is not included in the repo). The file can be re-downloaded from your developer console.
 
 ### Update the timeline entries
 
