@@ -4,7 +4,7 @@ from timelnr import app, config, db
 langs = {}
 with db.connect() as connection:
     response = list(connection.execute(
-        "SELECT `"+config.DB_TABLE_PREFIX+"languages`.* FROM `"+config.DB_TABLE_PREFIX+"languages`;"))
+        "SELECT `" + config.DB_TABLE_PREFIX + "languages`.* FROM `" + config.DB_TABLE_PREFIX + "languages`;"))
     for l in response:
         langs[l[1]] = l[2]
 
@@ -24,7 +24,7 @@ def home(curr_lang):
     with db.connect() as connection:
 
         labels = list(connection.execute(
-            "SELECT `"+config.DB_TABLE_PREFIX+"labels`.* FROM `"+config.DB_TABLE_PREFIX+"labels`;"))
+            "SELECT `" + config.DB_TABLE_PREFIX + "labels`.* FROM `" + config.DB_TABLE_PREFIX + "labels`;"))
 
         list_labels = [
             {
@@ -37,11 +37,7 @@ def home(curr_lang):
         ]
 
         result = connection.execute(
-            "SELECT `"+config.DB_TABLE_PREFIX+"entries`.* FROM `"+config.DB_TABLE_PREFIX+"entries`;")
-
-        # Query joins entry and label if the color matches the label slug
-        # result = connection.execute(
-        #    "SELECT * FROM mgt_entries entry LEFT JOIN mgt_labels label ON entry.mgtColor = label.labelSlug ORDER BY mgtID")
+            "SELECT `" + config.DB_TABLE_PREFIX + "entries`.* FROM `" + config.DB_TABLE_PREFIX + "entries`;")
 
         entries = []
         for row in result:
