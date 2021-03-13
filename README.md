@@ -6,7 +6,7 @@ The MetalGearTimeline is a web app built in Pyton, Flesk and Jinja. All the data
 
 ### Sheet structure
 
-All the data is pulled from a Google Sheet with the following structure:
+All the timeline data is pulled from a Google Sheet with the following structure:
 
 |     |      |      |       |        |                |     | ENGLISH            | ITALIAN        | ... |
 | --- | ---- | ---- | ----- | ------ | -------------- | --- | ------------------ | -------------- | --- |
@@ -48,12 +48,13 @@ NOTE: `importer.py` pulls data from the translation sheet via the Google API. To
 
 ### Add new language
 
-1. Make sure that the relative Sheet column has the right language code
-2. Make sure `config.py` contains the new language. Currently the order needs to match the one in the Sheet.
+1. Make sure that the relative column in the Entries sheet page has the right language code
+2. Make sure the Languages sheet page contains the new language. Currently the order needs to match the one in the Sheet.
 3. Run `py imorter.py`. This will recreate the SQL database
 4. Rebuild docker image with `sh start.sh`
 
-### Change styling
+### Change styling and labels
 
-1. Edit the files you want to change
-2. Restart the Docker container with `docker restart mgt`
+1. Edit the CSS files you want to change
+2. Edit the labels colors from the Labels page of the sheet
+3. Restart the Docker container with `docker restart mgt`
