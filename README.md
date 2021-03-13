@@ -29,8 +29,7 @@ Open 'timelnr/config.py' to configure Timelnr:
 
 ## Sheet structure
 
-IMPORTANT: The sheet structure can be changed, as long as the data ranges defined in `timelnr/config.py` are correct.
-{: .alert .alert-warning}
+> **_IMPORTANT:_** The sheet structure can be changed, as long as the data ranges defined in `timelnr/config.py` are correct.
 
 In the sheet there should be three pages: Entries (the content of the timeline), Languages (list of supported languages) and Labels (management and styling).
 
