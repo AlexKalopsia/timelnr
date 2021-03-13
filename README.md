@@ -15,7 +15,7 @@ Timelnr is a web app built in Pyton, Flesk and Jinja. It was originally built fo
 
 ## Config.py
 
-Open 'timelnr/config.py' to configure Timelnr:
+Open `timelnr/config.py` to configure Timelnr:
 
 |                           | Description                                                | Example                            |
 | ------------------------- | ---------------------------------------------------------- | ---------------------------------- |
@@ -47,7 +47,7 @@ The Entries page normally has the following structure:
 - **ID**: entry ID. Must be unique
 - **YEAR**: the year when a specific timeline entry happened
 - **GAME**: title of the game. Should be used only for the first entry belonging to the game
-- **COLOR**: css class defined in 'timelnr/config.py'
+- **COLOR**: css class defined in `timelnr/config.py`
 - **SOURCE**: unused. Refers to the game that is source of that information
 - **IMG**: name of the image relative to the entry. Stored in `timelnr/static/images/`
 - **VID**: unused. link to a YouTube video related to the entry
