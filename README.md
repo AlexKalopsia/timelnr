@@ -2,7 +2,10 @@
 
 The MetalGearTimeline is a web app built in Pyton, Flesk and Jinja. All the data from the timeline, as well as some styling information, are pulled from a Google Sheet and stored in an SQL database.
 
-## How to
+## Requirements
+
+- A MySQL database where the data will be stored
+- A Docker environment
 
 ### Sheet structure
 
@@ -29,6 +32,23 @@ The Entries page normally has the following structure:
 - VID: unused. link to a YouTube video related to the entry
 
 IMPORTANT: The first entry under every language column needs to be the relative language code (refer to [this list](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)), which should also match the one defined in the Languages page.
+
+### Config.py
+
+Open 'timelnr/config.py' to configure Timelnr:
+
+|                           | Description                                             | Example                            |
+| ------------------------- | ------------------------------------------------------- | ---------------------------------- |
+| DB_HOST                   | Your database host address                              | `http://localhost:3306`            |
+| DB_USER                   | Your database username                                  | myUser                             |
+| DB_PSW                    | Your database password                                  | myPassword                         |
+| DB_TABLE_PREFIX           | The table prefix to be used                             | tln\_                              |
+| SPREADSHEET_ID            | The ID of the Google sheet. Can be found in the URL bar | 1jfdwjDSe_djhJDGDHgfdsjgsdfhj_d3X0 |
+| SPREADSHEET_ENTRIES_RANGE | Range covering the timeline entries information         | Entries!A3:V234                    |
+| SPREADSHEET_LABELS_RANGE  | Range covering the entry labels                         | Labels!A3:D13                      |
+| SPREADSHEET_LANG_RANGE    | Range covering the supported languages                  | Languages!A1:C15                   |
+
+## How to
 
 ### Pull the data from the Google Sheet
 
