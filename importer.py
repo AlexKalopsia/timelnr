@@ -2,7 +2,6 @@ from __future__ import print_function
 import pickle
 import os.path
 from timelnr import db, config
-from timelnr.config import langs
 
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
@@ -15,7 +14,7 @@ from sqlalchemy import Column, Integer, MetaData, String, Table
 # If modifying these scopes, delete the file token.pickle.
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly']
 
-def getDataFromSheet():
+def getSpreadsheets():
     """Shows basic usage of the Sheets API.
     Prints values from a sample spreadsheet.
     """
@@ -45,58 +44,82 @@ def getDataFromSheet():
     service = build('sheets', 'v4', credentials=creds)
 
     # Call the Sheets API
-    sheet = service.spreadsheets()
+    return service.spreadsheets()
 
-    result = sheet.values().get(spreadsheetId=config.SPREADSHEET_ID,
-                                range=config.SPREADSHEET_RANGE).execute()
+
+def getValuesFromSheet(spreadsheets, _range):
+    result = spreadsheets.values().get(spreadsheetId=config.SPREADSHEET_ID,
+                                range=_range).execute()
     values = result.get('values', [])
     return values
 
-
+sheet = getSpreadsheets()
 metadata = MetaData()
 
+langs = {}
 
-def createTable():
-    """Create the database table by dynamically looking 
-    at the langs defined in the timelnr config file"""
+def createTable(tableType):
 
     metadata.clear()
 
     with db.connect() as connection:
-        print('Wiping existing table...')
-        connection.execute('DROP TABLE IF EXISTS `' + config.DB_TABLE + '`')
+        print('Wiping existing '+tableType+' table...')
+        connection.execute('DROP TABLE IF EXISTS `' + config.DB_TABLE_PREFIX + tableType+'`')
 
-    print('Preparing table...')
-    timeline = Table(config.DB_TABLE, metadata,
-                     Column('mgtID', Integer, primary_key=True),
-                     Column('mgtYear', String(4)),
-                     Column('mgtGame', String(7)),
-                     Column('mgtColor', String(9)),
-                     Column('mgtSource', String(4)),
-                     Column('mgtImg', String(50)),
-                     Column('mgtVid', String(10)),
+    print('Preparing '+tableType+' table...')
+    table = None
+    values = None
+
+    if tableType == 'languages':
+        table = Table(config.DB_TABLE_PREFIX + 'languages', metadata,
+                     Column('ID', Integer, primary_key=True),
+                     Column('Slug', String(20)),
+                     Column('Name', String(30)),
                      mysql_charset='utf8mb4'
                      )
-    for lang in langs:
-        timeline.append_column(Column('mgtEvent_' + lang, String(900)))
-    print('Creating table...')
+        values = getValuesFromSheet(sheet, config.SPREADSHEET_LANG_RANGE)
+        for value in values:
+            langs[value[1]] = value[2]
+
+    elif tableType == 'entries':
+        table = Table(config.DB_TABLE_PREFIX + 'entries', metadata,
+                     Column('ID', Integer, primary_key=True),
+                     Column('Year', String(4)),
+                     Column('Game', String(7)),
+                     Column('Color', String(9)),
+                     Column('Source', String(4)),
+                     Column('Image', String(50)),
+                     Column('Video', String(10)),
+                     mysql_charset='utf8mb4'
+                     )
+        for lang in langs:
+            table.append_column(Column('Event_' + lang, String(900)))
+        values = getValuesFromSheet(sheet, config.SPREADSHEET_ENTRIES_RANGE)
+    elif tableType == 'labels':
+        table = Table(config.DB_TABLE_PREFIX + 'labels', metadata,
+                     Column('ID', Integer, primary_key=True),
+                     Column('Slug', String(30)),
+                     Column('Name', String(30)),
+                     Column('Color', String(7)),
+                     mysql_charset='utf8mb4'
+                     )
+        values = getValuesFromSheet(sheet, config.SPREADSHEET_LABELS_RANGE)
+    else:
+        table = None
+        values = None
+
     metadata.create_all(db)
-    return timeline
 
-def populateTable(timeline):
-    """Add all data to the timeline db"""
-
-    values = getDataFromSheet()
-    langCodes = values[1][7:]
-    print('Populating table...')
     with db.connect() as connection:
-        for value in values[2:]:
-            connection.execute(timeline.insert().values(value))
+        for value in values:
+            connection.execute(table.insert().values(value))   
+        print('Table '+tableType+' populated correctly')
 
 
 def main():
-    tl = createTable()
-    populateTable(tl)
+    createTable('languages')
+    createTable('labels')
+    createTable('entries')
     print('Import successful')
 
 

@@ -1,6 +1,12 @@
 from flask import redirect, render_template, url_for
-from timelnr import app, db
-from timelnr.config import langs
+from timelnr import app, config, db
+
+langs = {}
+with db.connect() as connection:
+    response = list(connection.execute(
+        "SELECT `"+config.DB_TABLE_PREFIX+"languages`.* FROM `"+config.DB_TABLE_PREFIX+"languages`;"))
+    for l in response:
+        langs[l[1]] = l[2]
 
 
 @app.route("/timeline")
@@ -18,7 +24,7 @@ def home(curr_lang):
     with db.connect() as connection:
 
         labels = list(connection.execute(
-            "SELECT `mgt_labels`.* FROM `mgt_labels`;"))
+            "SELECT `"+config.DB_TABLE_PREFIX+"labels`.* FROM `"+config.DB_TABLE_PREFIX+"labels`;"))
 
         list_labels = [
             {
@@ -31,7 +37,7 @@ def home(curr_lang):
         ]
 
         result = connection.execute(
-            "SELECT `mgt_entries`.* FROM `mgt_entries`;")
+            "SELECT `"+config.DB_TABLE_PREFIX+"entries`.* FROM `"+config.DB_TABLE_PREFIX+"entries`;")
 
         # Query joins entry and label if the color matches the label slug
         # result = connection.execute(
@@ -46,7 +52,7 @@ def home(curr_lang):
                      'name': l[2],
                      'color': l[3]}
                     for l in labels
-                    if l[1] == row["mgtColor"]
+                    if l[1] == row["Color"]
                 ),
                 {
                     'slug': '',
@@ -56,12 +62,13 @@ def home(curr_lang):
             )
 
             entry = {
-                'id': row['mgtID'],
-                'year': row['mgtYear'],
-                'event': {key: row['mgtEvent_' + key] for (key, value) in langs.items()},
-                'game': row['mgtGame'],
-                'source': row['mgtSource'],
-                'image': row['mgtImg'],
+                'id': row['ID'],
+                'year': row['Year'],
+                'event': {key: row['Event_' + key] for (key, value) in langs.items()},
+                'game': row['Game'],
+                'source': row['Source'],
+                'image': row['Image'],
+                'video': row['Video'],
                 'label': label
             }
             entries.append(entry)
