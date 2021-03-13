@@ -1,6 +1,6 @@
-# Metal Gear Timeline
+# Timelnr
 
-The MetalGearTimeline is a web app built in Pyton, Flesk and Jinja. All the data from the timeline, as well as some styling information, are pulled from a Google Sheet and stored in an SQL database.
+Timelnr is a web app built in Pyton, Flesk and Jinja. It was originally built for the [Metal Gear Timeline](https://www.metalgeartimeline.com). All the data from the timeline, as well as some styling information, are pulled from a Google Sheet and stored in an SQL database.
 
 ## Requirements
 
@@ -10,7 +10,8 @@ The MetalGearTimeline is a web app built in Pyton, Flesk and Jinja. All the data
 ## Deployment
 
 1. Setup a MySQL database, and set the credentials in 'timelnr/config.py' as explained in the seciton below
-2. Run `start.sh` to build the Docker image and let it run on your server
+2. Edit `start.sh` to configure your Docker environment (container name, and container port)`
+3. Run `start.sh` to build the Docker image and let it run on your server
 
 ## Config.py
 
