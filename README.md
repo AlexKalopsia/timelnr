@@ -6,7 +6,11 @@ The MetalGearTimeline is a web app built in Pyton, Flesk and Jinja. All the data
 
 ### Sheet structure
 
-All the timeline data is pulled from a Google Sheet with the following structure:
+IMPORTANT: The sheet structure can be changed, as long as the data ranges defined in `timelnr/config.py` are correct.
+
+In the sheet there should be three pages: Entries (the content of the timeline), Languages (list of supported languages) and Labels (management and styling).
+
+The Entries page normally has the following structure:
 
 |     |      |      |       |        |                |     | ENGLISH            | ITALIAN        | ... |
 | --- | ---- | ---- | ----- | ------ | -------------- | --- | ------------------ | -------------- | --- |
@@ -24,7 +28,7 @@ All the timeline data is pulled from a Google Sheet with the following structure
 - IMG: name of the image relative to the entry. Stored in `timelnr/static/images/`
 - VID: unused. link to a YouTube video related to the entry
 
-IMPORTANT: The first entry under every language column needs to be the relative language code (refer to [this list](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes))
+IMPORTANT: The first entry under every language column needs to be the relative language code (refer to [this list](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)), which should also match the one defined in the Languages page.
 
 ### Pull the data from the Google Sheet
 
