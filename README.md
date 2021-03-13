@@ -30,9 +30,11 @@ Open `timelnr/config.py` to configure Timelnr:
 
 ## Sheet structure
 
-In the sheet there should be three pages: Entries (the content of the timeline), Languages (list of supported languages) and Labels (management and styling).
+Here you can find a [Useful Template](https://docs.google.com/spreadsheets/d/1ZRiYTOvSCwL_b4kQMDPXzId8Y3lX_pPHKhufqx5noP0/edit?usp=sharing). Feel free to make a copy and edit to your needs.
 
 > **_IMPORTANT:_** The sheet structure can be changed, as long as the data ranges defined in `timelnr/config.py` are correct.
+
+In the sheet there should be three pages: Entries (the content of the timeline), Languages (list of supported languages) and Labels (management and styling).
 
 The Entries page normally has the following structure:
 
