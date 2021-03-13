@@ -7,7 +7,7 @@ Timelnr is a web app built in Pyton, Flesk and Jinja. It was originally built fo
 - A MySQL database where the data will be stored
 - A Docker environment
 
-## Deployment
+## Docker deployment
 
 1. Setup a MySQL database, and set the credentials in `timelnr/config.py` as explained in the seciton below
 2. Edit `start.sh` to configure your Docker environment (container name, and container port)`
@@ -82,4 +82,4 @@ The Entries page normally has the following structure:
 
 1. Edit the CSS files you want to change
 2. Edit the labels colors from the Labels page of the sheet
-3. Restart the Docker container with `docker restart mgt`
+3. Restart the Docker container with `docker restart timelnr`
