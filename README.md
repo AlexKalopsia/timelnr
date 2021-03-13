@@ -9,7 +9,7 @@ Timelnr is a web app built in Pyton, Flesk and Jinja. It was originally built fo
 
 ## Deployment
 
-1. Setup a MySQL database, and set the credentials in 'timelnr/config.py' as explained in the seciton below
+1. Setup a MySQL database, and set the credentials in `timelnr/config.py` as explained in the seciton below
 2. Edit `start.sh` to configure your Docker environment (container name, and container port)`
 3. Run `start.sh` to build the Docker image and let it run on your server
 
