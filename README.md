@@ -11,7 +11,9 @@ Timelnr is a web app built in Pyton, Flesk and Jinja. It was originally built fo
 
 1. Setup a MySQL database, and set the credentials in `timelnr/config.py` as explained in the section below
 2. Edit `start.sh` to configure your Docker environment (container name, and container port)`
-3. Run `start.sh` to build the Docker image and let it run on your server
+3. Create a virtual environment (usually `python -m venv venv`)
+4. Run `start.sh` to build the Docker image and let it run on your server
+5. If everything works correctly, your instance of timlnr should be now reacheable, and you can now deactivate the virtual environment
 
 ## Config.py
 
@@ -80,6 +82,7 @@ The Entries page normally has the following structure:
 3. Run `py imorter.py`. This will recreate the SQL database
 4. Create a virtual environment (usually `python -m venv venv`)
 5. Rebuild docker image with `sh start.sh`
+6. If everything works correctly, your instance of timlnr should now be reacheable, and you can now deactivate the virtual environment
 
 ### Change styling and labels
 
