@@ -78,7 +78,8 @@ The Entries page normally has the following structure:
 1. Make sure that the relative column in the Entries sheet page has the right language code
 2. Make sure the Languages sheet page contains the new language. Currently the order needs to match the one in the Sheet.
 3. Run `py imorter.py`. This will recreate the SQL database
-4. Rebuild docker image with `sh start.sh`
+4. Create a virtual environment (usually `python -m venv venv`)
+5. Rebuild docker image with `sh start.sh`
 
 ### Change styling and labels
 
