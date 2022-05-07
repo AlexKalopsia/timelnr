@@ -1,57 +1,35 @@
 from __future__ import print_function
-import pickle
 import os.path
 from timelnr import db, config
+import gspread
 
-from googleapiclient.discovery import build
-from google_auth_oauthlib.flow import InstalledAppFlow
-from google.auth.transport.requests import Request
 from sqlalchemy import Column, Integer, MetaData, String, Table
+
+from google.auth.transport.requests import Request
+from google.oauth2.credentials import Credentials
+from google_auth_oauthlib.flow import InstalledAppFlow
+from googleapiclient.discovery import build
+from googleapiclient.errors import HttpError
+
 
 # Importer.py fetches the timeline multilanguage data from 
 # an external google sheet, and stores the data in a MySQL database
 
-# If modifying these scopes, delete the file token.pickle.
-SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly']
 
 def getSpreadsheets():
-    """Shows basic usage of the Sheets API.
-    Prints values from a sample spreadsheet.
-    """
-    creds = None
-    # The file token.pickle stores the user's access and refresh tokens, and is
-    # created automatically when the authorization flow completes for the first
-    # time.
-    if os.path.exists('token.pickle'):
-        print('Loading credentials from file...')
-        with open('token.pickle', 'rb') as token:
-            creds = pickle.load(token)
-    # If there are no (valid) credentials available, let the user log in.
-    if not creds or not creds.valid:
-        if creds and creds.expired and creds.refresh_token:
-            print('Refreshing access token...')
-            creds.refresh(Request())
-        else:
-            print('Fetching new tokens...')
-            flow = InstalledAppFlow.from_client_secrets_file(
-                'credentials.json', SCOPES)
-            creds = flow.run_local_server(port=0)
-        # Save the credentials for the next run
-        with open('token.pickle', 'wb') as token:
-            print('Saving credentials for future use...')
-            pickle.dump(creds, token)
-
-    service = build('sheets', 'v4', credentials=creds)
-
-    # Call the Sheets API
-    return service.spreadsheets()
+    sa = gspread.service_account(filename="service_account.json")
+    sh = sa.open_by_key(config.SPREADSHEET_ID)
+    return sh
 
 
 def getValuesFromSheet(spreadsheets, _range):
-    result = spreadsheets.values().get(spreadsheetId=config.SPREADSHEET_ID,
-                                range=_range).execute()
-    values = result.get('values', [])
-    return values
+
+    ws_name = _range.split("!")[0]
+    ws_range = _range.split("!")[1]
+
+    ws = spreadsheets.worksheet(ws_name)
+    result = ws.get(ws_range)
+    return result
 
 sheet = getSpreadsheets()
 metadata = MetaData()
@@ -95,6 +73,7 @@ def createTable(tableType):
         for lang in langs:
             table.append_column(Column('Event_' + lang, String(900)))
         values = getValuesFromSheet(sheet, config.SPREADSHEET_ENTRIES_RANGE)
+
     elif tableType == 'labels':
         table = Table(config.DB_TABLE_PREFIX + 'labels', metadata,
                      Column('ID', Integer, primary_key=True),
@@ -113,14 +92,15 @@ def createTable(tableType):
     with db.connect() as connection:
         for value in values:
             connection.execute(table.insert().values(value))   
-        print('Table '+tableType+' populated correctly')
+        print('Table ' + config.DB_TABLE_PREFIX + tableType + ' populated correctly\n')
 
 
 def main():
+    print('Timelnr Importer\n---------------\n')
     createTable('languages')
     createTable('labels')
     createTable('entries')
-    print('Import successful')
+    print('Import successful!')
 
 
 if __name__ == '__main__':

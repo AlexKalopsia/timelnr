@@ -1,5 +1,6 @@
 :root {
   background-color: #dcdcdc;
+  --navbar-dropdown-background: #fff;
   --text: #424243;
   --entry-background: #f9f3f3;
   --entry-text: #424243;
@@ -15,6 +16,7 @@
 
 :root.dark-mode {
   background-color: #131817;
+  --navbar-dropdown-background: #192d2a;
   --text: #4b4b4b;
   --entry-background: #0c0c0c;
   --entry-text: #7a7a7a;
@@ -68,8 +70,12 @@ ul, ol {
   color: var(--text);
 }
 
-.mgt-navbar {
+.timelnr-navbar {
   background-color: #232323 !important;
+}
+
+.dropdown-menu {
+  background-color: var(--navbar-dropdown-background) !important;
 }
 
 .btn-success {

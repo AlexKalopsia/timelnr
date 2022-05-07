@@ -67,24 +67,24 @@ The Entries page normally has the following structure:
 
 ### Pull the data from the Google Sheet
 
-1. Go on the [Google Developer Console](https://console.developers.google.com)
-2. Create a project and generate a OAuth 2.0 Client ID
-3. Download the credentials as JSON file
-4. Store the JSON file in the project root
-5. Simply run `py importer.py`
+> **_NOTE:_** `importer.py` pulls data from the Sheet via the Google API. To do this it relies on the dev credentials stored in `service_account.json` (which is not included in the repo). The file can be downloaded from your developer console following the instructions below.
 
-> **_NOTE:_** `importer.py` pulls data from the translation sheet via the Google API. To do this it relies on the dev credentials stored in `credentials.json` (which is not included in the repo). The file can be re-downloaded from your developer console.
+1. Go on the [Google Developer Console](https://console.developers.google.com)
+2. Create a project, enable Drive and Sheets API, and create a Service Account
+3. Copy the generated email address, and add it to the list of users having access to your Sheet
+4. Generate a JSON key and download it as `service_account.json` in the project root
+5. Simply run `python importer.py`
 
 ### Update the timeline entries
 
 1. Edit the entries inside the Google Sheet
-2. Run `py importer.py` to rebuild the database
+2. Run `python importer.py` to rebuild the database
 
 ### Add new languages
 
 1. Make sure that the relative column in the Entries sheet page has the right language code
 2. Make sure the Languages sheet page contains the new language. Currently the order needs to match the one in the Sheet.
-3. Run `py imorter.py`. This will recreate the SQL database
+3. Run `python imorter.py`. This will recreate the SQL database
 4. Create a virtual environment (`python -m venv venv`) and activate it (`. venv/bin/activate`)
 5. Rebuild docker image with `sh start.sh`
 6. If everything works correctly, your instance of timlnr should now be reacheable, and you can now `deactivate` the virtual environment
