@@ -1,28 +1,14 @@
 $(document).ready(function () {
-  //HIDE ELEMENTS ON LOAD
-  //$('#entry-add').hide();
-  //$('.entry-status').find('p').hide();
-
-  //REVEAL/HIDE NON-CANON
-  $("#button-canon").click(function (event) {
+  
+  //REVEAL/HIDE BY CLASS
+  $("#button-hide").click(function (event) {
     $(this).text(function (i, text) {
       return text === "Show everything"
-        ? "Hide uncertain canon"
+        ? "Hide Class"
         : "Show everything";
     });
-    $(".mgspo-group").slideToggle(250);
-    $(".d-md-block.mgspo-label").slideToggle(250);
-    //$('.mgr').slideToggle(250);
-  });
-
-  //REVEAL/HIDE MGSV
-  $("#button-mgsv").click(function (event) {
-    console.log("HIDEEE");
-    $(this).text(function (i, text) {
-      return text === "Show MGSV" ? "Hide MGSV" : "Show MGSV";
-    });
-    $(".mgsv-group").slideToggle(250);
-    //$('.mgr').slideToggle(250);
+    $(".myclass-group").slideToggle(250);
+    $(".d-md-block.myclass-label").slideToggle(250);
   });
 
   /**

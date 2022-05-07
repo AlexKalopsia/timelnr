@@ -6,22 +6,25 @@ Timelnr is a web app built in Pyton, Flesk and Jinja. It was originally built fo
 
 - A MySQL database where the data will be stored
 - A Docker environment
+- Python
 
 ## Docker deployment
 
-1. Setup a MySQL database, and set the credentials in `timelnr/config.py` as explained in the section below
+1. Create a MySQL database, and set the credentials in `timelnr/config.py` as explained in the section below
 2. Edit `start.sh` to configure your Docker environment (container name, and container port)`
 3. Create a virtual environment (`python -m venv venv`) and activate it (`. venv/bin/activate`)
 4. Run `start.sh` to build the Docker image and let it run on your server
-5. If everything works correctly, your instance of timlnr should be now reacheable, and you can now deactivate the virtual environment
+5. If everything works correctly, your instance of timlnr should be now reacheable, and you can now `deactivate` the virtual environment
 
 ## Config.py
 
-Open `timelnr/config.py` to configure Timelnr:
+Open `timelnr/config-sample.py` to configure Timelnr:
 
 |                           | Description                                                | Example                            |
 | ------------------------- | ---------------------------------------------------------- | ---------------------------------- |
+| SECRET_KEY                | A key (byte format) you should generate yourself           | `b'MY_KEY_HERE'`                   |
 | DB_HOST                   | Your database host address                                 | `http://localhost:3306`            |
+| DB_NAME                   | Your database name                                         | DB_Timelnr                         |
 | DB_USER                   | Your database username                                     | myUser                             |
 | DB_PSW                    | Your database password                                     | myPassword                         |
 | DB_TABLE_PREFIX           | The table prefix to be used. Should end with an underscore | tln\_                              |
@@ -30,13 +33,15 @@ Open `timelnr/config.py` to configure Timelnr:
 | SPREADSHEET_LABELS_RANGE  | Range covering the entry labels                            | Labels!A3:D13                      |
 | SPREADSHEET_LANG_RANGE    | Range covering the supported languages                     | Languages!A1:C15                   |
 
+> **_IMPORTANT:_** Once you are done setting up the config file, rename it to `config.py`.
+
 ## Sheet structure
 
 Here you can find a [Useful Template](https://docs.google.com/spreadsheets/d/1ZRiYTOvSCwL_b4kQMDPXzId8Y3lX_pPHKhufqx5noP0/edit?usp=sharing). Feel free to make a copy and edit to your needs.
 
 > **_IMPORTANT:_** The sheet structure can be changed, as long as the data ranges defined in `timelnr/config.py` are correct.
 
-In the sheet there should be three pages: Entries (the content of the timeline), Languages (list of supported languages) and Labels (management and styling).
+In the sheet there should be three pages: Entries (the content of the timeline), Labels (management and styling), and Languages (list of supported languages).
 
 The Entries page normally has the following structure:
 
@@ -51,7 +56,7 @@ The Entries page normally has the following structure:
 - **ID**: entry ID. Must be unique
 - **YEAR**: the year when a specific timeline entry happened
 - **GAME**: title of the game. Should be used only for the first entry belonging to the game
-- **COLOR**: css class defined in `timelnr/config.py`
+- **COLOR**: name of the CSS class defined in the Labels page
 - **SOURCE**: unused. Refers to the game that is source of that information
 - **IMG**: name of the image relative to the entry. Stored in `timelnr/static/images/`
 - **VID**: unused. link to a YouTube video related to the entry
@@ -82,10 +87,15 @@ The Entries page normally has the following structure:
 3. Run `py imorter.py`. This will recreate the SQL database
 4. Create a virtual environment (`python -m venv venv`) and activate it (`. venv/bin/activate`)
 5. Rebuild docker image with `sh start.sh`
-6. If everything works correctly, your instance of timlnr should now be reacheable, and you can now deactivate the virtual environment
+6. If everything works correctly, your instance of timlnr should now be reacheable, and you can now `deactivate` the virtual environment
 
 ### Change styling and labels
 
 1. Edit the CSS files you want to change
 2. Edit the labels colors from the Labels page of the sheet
 3. Restart the Docker container with `docker restart timelnr`
+
+### Notes on editing and styling
+
+- If HTML files are changed, it's necessary to restart the Docker container (`docker restart timelnr`)
+- If only CSS files are changed, it's sufficient to just refresh the web page, deleting the cache (`Ctrl`+`F5`)

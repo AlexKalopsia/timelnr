@@ -6,6 +6,7 @@ app = Flask(__name__)
 config = Config()
 
 app.config.from_object(config)
+app.secret_key = config.SECRET_KEY
 
 db = create_engine(config.SQLALCHEMY_DATABASE_URI,
                    pool_pre_ping=True, pool_recycle=3600)

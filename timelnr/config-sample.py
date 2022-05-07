@@ -4,6 +4,7 @@ from timelnr.models import Label
 
 
 class Config:
+    SECRET_KEY = b'GENERATE_SECRET_KEY'
     DB_HOST = 'YOUR_DATABASE_HOST'
     DB_USER = 'YOUR_DATABASE_USER'
     DB_PSW = 'YOUR_DATABASE_PASSWORD'

@@ -1,4 +1,4 @@
-from flask import redirect, render_template, url_for
+from flask import request, redirect, render_template, session, url_for
 from timelnr import app, config, db
 
 langs = {}
@@ -17,6 +17,17 @@ def timeline():
 @app.route("/")
 def root():
     return redirect(url_for('home', curr_lang='en'))
+
+
+@app.get("/toggle-theme")
+def toggle_theme():
+    current_theme = session.get("theme")
+    if current_theme == "dark":
+        session["theme"] = "light"
+    else:
+        session["theme"] = "dark"
+
+    return redirect(request.args.get("current_page"))
 
 
 @app.route("/<string:curr_lang>")
@@ -68,4 +79,4 @@ def home(curr_lang):
                 'label': label
             }
             entries.append(entry)
-    return render_template('timeline.html', entries=entries, curr_lang=curr_lang, langs=langs, labels=list_labels)
+    return render_template('timeline.html', entries=entries, curr_lang=curr_lang, langs=langs, labels=list_labels, theme=session.get("theme"))

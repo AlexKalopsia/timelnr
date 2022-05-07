@@ -1,5 +1,35 @@
+:root {
+  background-color: #dcdcdc;
+  --text: #424243;
+  --entry-background: #f9f3f3;
+  --entry-text: #424243;
+  --entry-date: #ffffff;
+  --entry-date-background: #72a68b;
+  --timeline-bar: #9c9c9c;
+  --link-color: #72a68b;
+  --link-color-hover: #5b8e74;
+  --quicknav-link: #fff;
+  --quicknav-box-background: #9c9c9c !important;
+  --header: #212529;
+}
+
+:root.dark-mode {
+  background-color: #131817;
+  --text: #4b4b4b;
+  --entry-background: #0c0c0c;
+  --entry-text: #7a7a7a;
+  --entry-date: #a5b5b1;
+  --entry-date-background: #192d2a;
+  --timeline-bar: #263d35;
+  --link-color: #597164;
+  --link-color-hover: #475b50;
+  --quicknav-link: #b7cac5;
+  --quicknav-box-background: #516b64 !important;
+  --header: #556360;
+}
+
 body {
-  background-color: #dcdcdc !important;
+  background-color: transparent !important;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -9,7 +39,7 @@ body {
 
 p {
   font-family: "Roboto", sans-serif;
-  color: #424243;
+  color: var(--text);
   text-align: justify;
 }
 
@@ -17,17 +47,25 @@ a,
 a:visited,
 a:active,
 a:link {
-  color: #72a68b;
+  color: var(--link-color);
   text-decoration: none !important;
 }
 
 a:hover {
-  color: #5b8e74 !important;
+  color: var(--link-color-hover) !important;
 }
 
 a.anchor {
   position: relative;
   top: -100px;
+}
+
+h1, h2, h5 {
+  color: var(--header);
+}
+
+ul, ol {
+  color: var(--text);
 }
 
 .mgt-navbar {
@@ -50,7 +88,7 @@ a.anchor {
 }
 
 .timeline-bar {
-  background: #9c9c9c;
+  background: var(--timeline-bar);
   width: 2px;
   height: 25px;
   margin-left: auto;
@@ -59,13 +97,13 @@ a.anchor {
 
 .entry {
   text-align: center;
-  background: #f9f3f3;
+  background: var(--entry-background);;
   border-radius: 0px;
 }
 .entry p {
   font-family: "Roboto", sans-serif;
   font-size: 14px;
-  color: #424242;
+  color: var(--entry-text);
   margin-top: 5px;
   text-align: center;
   min-height: 35px;
@@ -79,8 +117,8 @@ a.anchor {
 
 .entry-date {
   text-align: center;
-  color: #ffffff;
-  background: #72a68b;
+  color: var(--entry-date);
+  background: var(--entry-date-background);
   height: 40px;
 }
 .entry-date h1 {
@@ -88,6 +126,7 @@ a.anchor {
   font-size: 18px;
   height: 18px;
   margin-top: 10px;
+  color: var(--entry-date);
 }
 
 .entry-label h1 {
@@ -124,8 +163,9 @@ a.anchor {
   z-index: 9999999;
 }
 .hidebuttons > button {
-  color: #ffffff !important;
+  color: var(--quicknav-link) !important;
   margin-bottom: 4px !important;
+  background: var(--quicknav-box-background) !important;
 }
 
 .quicknav {
@@ -138,10 +178,10 @@ a.anchor {
 }
 
 .quicknav a {
-  color: #ffffff !important;
+  color: var(--quicknav-link) !important;
 }
 .quicknav a:hover {
-  color: #ffffff !important;
+  color: var(--quicknav-link) !important;
   text-decoration: underline !important;
 }
 
@@ -154,4 +194,7 @@ a.anchor {
   font-size: 12px;
   margin-bottom: 4px;
   width: 100px;
+  background: var(--quicknav-box-background) !important;
 }
+
+

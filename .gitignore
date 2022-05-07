@@ -3,6 +3,9 @@ myenv
 timelnr/config.py
 timelnr/static/images/*
 !timelnr/static/images/IMAGES_GO_HERE
+!timelnr/static/images/header_light.png
+!timelnr/static/images/header_dark.png
+!timelnr/static/images/logo_xs.png
 test.py
 credentials.json
 token.pickle
