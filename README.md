@@ -1,22 +1,22 @@
 # Timelnr
 
-Timelnr is a web app built in Pyton, Flask and Jinja. It was originally built for the [Metal Gear Timeline](https://www.metalgeartimeline.com). All the data from the timeline, as well as some styling information, is pulled from a Google Sheet and automatically stored in an SQL database.
+Timelnr is a web app built in Pyton, Flask and Jinja. It was originally built for the [Metal Gear Timeline](https://www.metalgeartimeline.com). All the data from the timeline, as well as some styling information, is pulled from a Google Sheet (to facilitate community translation) and is automagically stored in an SQL database.
 
 ![timelnr_header_dark](https://user-images.githubusercontent.com/706110/167256943-d16e2d4d-cee9-4d71-966f-ae684251e860.png)
 
 ## Requirements
 
-- A MySQL database where the data will be stored
+- Python 3.8
+- A MySQL database
 - A Docker environment
-- Python
 
-## Docker deployment
+## Setup and Deployment
 
-1. Create a MySQL database, and set the credentials in `timelnr/config.py` as explained in the section below
+1. Create a MySQL database, and set the correct credentials in the config file as explained in the section below
 2. Edit `start.sh` to configure your Docker environment (container name, and container port)`
 3. Create a virtual environment (`python -m venv venv`) and activate it (`. venv/bin/activate`)
 4. Run `start.sh` to build the Docker image and let it run on your server
-5. If everything works correctly, your instance of timlnr should be now reacheable, and you can now `deactivate` the virtual environment
+5. If everything works correctly, your instance of Timelnr should be now reacheable. You can safely `deactivate` the virtual environment
 
 ## Config.py
 
@@ -43,7 +43,7 @@ Here you can find a [Useful Template](https://docs.google.com/spreadsheets/d/1ZR
 
 > **_IMPORTANT:_** The sheet structure can be changed, as long as the data ranges defined in `timelnr/config.py` are correct.
 
-In the sheet there should be three pages: Entries (the content of the timeline), Labels (management and styling), and Languages (list of supported languages).
+The sheet should include three pages: Entries (the content of the timeline), Labels (management and styling), and Languages (list of supported languages).
 
 The Entries page normally has the following structure:
 
@@ -75,7 +75,7 @@ The Entries page normally has the following structure:
 4. Store the JSON file in the project root
 5. Simply run `py importer.py`
 
-> **_NOTE:_** `importer.py` pulls data from the translation sheet via the Google API. To do this it relies on the dev credentials stored in `credentials.json` (which is not included in the repo). The file can be re-downloaded from your developer console.
+> **_NOTE:_** `importer.py` pulls data from the translation sheet via the Google API. To do this it relies on the dev credentials stored in `credentials.json` (which is not included in the repo). The file can be downloaded from your developer console, as explained above.
 
 ### Update the timeline entries
 
