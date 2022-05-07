@@ -2,6 +2,8 @@
 
 Timelnr is a web app built in Pyton, Flesk and Jinja. It was originally built for the [Metal Gear Timeline](https://www.metalgeartimeline.com). All the data from the timeline, as well as some styling information, is pulled from a Google Sheet and automatically stored in an SQL database.
 
+![timelnr_header_dark](https://user-images.githubusercontent.com/706110/167256943-d16e2d4d-cee9-4d71-966f-ae684251e860.png)
+
 ## Requirements
 
 - A MySQL database where the data will be stored
