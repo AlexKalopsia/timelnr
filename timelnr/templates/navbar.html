@@ -1,5 +1,65 @@
 {% block navbar %}
 
+
+<nav class="navbar navbar-expand-md navbar-dark fixed-top timelnr-navbar">
+    <div class="container-fluid">
+        <a class="nav-item nav-link nav__link .d-md-block" href="{{ url_for('toggle_theme', current_page=request.path) }}" >
+            <span class="nav__item">
+                {% if theme == "dark" %}
+                ☀️
+                {% else %}
+                🌙
+                {% endif %}
+            </span>
+        </a>
+        <a class="navbar-brand" href="#">
+            <img style="max-width: 100px;" src="{{ url_for('static', filename='images/logo_xs.png') }}">
+        </a>
+  
+        <!-- Hamburger Button <= SM -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarScroll">
+
+            <ul class="navbar-nav navbar-nav-scroll" style="--bs-scroll-height: 240px;">
+
+                <div class="nav-item dropdown p-2">
+                    <a class="nav-link dropdown-toggle d-lg-none" href="#" id="dropdown01" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Games
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdown01">
+                        {% for label in labels %}
+                            <a class="dropdown-item" href="#{{ label.slug }}" style="color:{{ label.color }} !important;">{{ label.name }}</a>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <li class="nav-item dropdown p-2">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Language
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdown01">
+                        {% for lang in langs %}
+                            <a class="dropdown-item" href="{{ url_for('home', curr_lang=lang )}}">{{ langs[lang] }}</a>
+                        {% endfor %}
+                    </ul>
+                </li>
+                <li class="nav-item p-2">
+                    <a class="nav-link" href="#about">About MGT</a>
+                </li>
+                <li class="nav-item p-2">
+                    <a class="nav-link" href="#contribute"><b>♥ DONATE</b></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!--
+
+
+
 <nav class="navbar navbar-dark navbar-expand-sm fixed-top timelnr-navbar">
     <a class="navbar-brand" href=""><img style="max-width: 100px;" src="{{ url_for('static', filename='images/logo_xs.png') }}"></a>
     <a class="nav-item nav-link nav__link" href="{{ url_for('toggle_theme', current_page=request.path) }}" >
@@ -31,6 +91,6 @@
     <a class="nav-link nav-item ml-auto d-none d-md-block" href="#section-1">Section 1</a>
     <a class="nav-link d-none d-md-block" href="#section-2">Section 2</a>
     <a class="nav-link d-none d-lg-block" href="#section-3">Section 3</a>
-</nav>
+</nav> -->
 
 {% endblock navbar %}

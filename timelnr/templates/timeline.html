@@ -37,8 +37,8 @@
 
     <!-- Label On the right side (for lg+ screens) -->
     {% if entry.game != '' %}
-    <a id="{{ entry.label.slug }}" class="anchor" style="top:-100px; position: relative;"></a>
     <div class="d-none d-md-block col-12 col-md-2 col-lg-1 entry-label {{ entry.label.slug }}-label">
+        <a id="{{ entry.label.slug }}" class="anchor" style="top:-100px; position: relative;"></a>
         <h1>{{ entry.label.name }}</h1>
     </div>
     {% endif %}

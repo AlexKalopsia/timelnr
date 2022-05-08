@@ -1,6 +1,7 @@
 :root {
   background-color: #dcdcdc;
   --navbar-dropdown-background: #fff;
+  --my-dark-rgb: 35,35,35;
   --text: #424243;
   --entry-background: #f9f3f3;
   --entry-text: #424243;
@@ -17,6 +18,7 @@
 :root.dark-mode {
   background-color: #131817;
   --navbar-dropdown-background: #192d2a;
+  --my-dark-rgb: 35,35,35;
   --text: #4b4b4b;
   --entry-background: #0c0c0c;
   --entry-text: #7a7a7a;
@@ -49,7 +51,7 @@ a,
 a:visited,
 a:active,
 a:link {
-  color: var(--link-color);
+  color: var(--link-color) !important;
   text-decoration: none !important;
 }
 
@@ -69,6 +71,16 @@ h1, h2, h5 {
 ul, ol {
   color: var(--text);
 }
+
+.bg-dark {
+  --bs-bg-opacity: 1;
+  background-color: rgba(var(--my-dark-rgb),var(--bs-bg-opacity))!important;
+}
+
+.navbar-brand {
+  margin-left: 15px;
+}
+
 
 .timelnr-navbar {
   background-color: #232323 !important;
@@ -95,10 +107,12 @@ ul, ol {
 
 .timeline-bar {
   background: var(--timeline-bar);
-  width: 2px;
+  width: 2px !important;
   height: 25px;
   margin-left: auto;
   margin-right: auto;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
 }
 
 .entry {
