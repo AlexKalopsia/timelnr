@@ -56,41 +56,4 @@
     </div>
 </nav>
 
-<!--
-
-
-
-<nav class="navbar navbar-dark navbar-expand-sm fixed-top timelnr-navbar">
-    <a class="navbar-brand" href=""><img style="max-width: 100px;" src="{{ url_for('static', filename='images/logo_xs.png') }}"></a>
-    <a class="nav-item nav-link nav__link" href="{{ url_for('toggle_theme', current_page=request.path) }}" >
-        <span class="nav__item">
-            {% if theme == "dark" %}
-            ☀️
-            {% else %}
-            🌙
-            {% endif %}
-        </span>
-    </a>
-    <a class="nav-item nav-link d-none d-sm-block" href="#">Simple Link</a>
-    <div class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle d-lg-none" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Labels</a>
-        <div class="dropdown-menu" aria-labelledby="dropdown01">
-        {% for label in labels %}
-            <a class="dropdown-item" href="#{{ label.slug }}" style="color:{{ label.color }} !important;">{{ label.name }}</a>
-        {% endfor %}
-        </div>
-    </div>
-    <div class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Language</a>
-        <div class="dropdown-menu" aria-labelledby="dropdown01">
-        {% for lang in langs %}
-            <a class="nav-link active" href="{{ url_for('home', curr_lang=lang )}}">{{ langs[lang] }}</a>
-        {% endfor %}
-        </div>
-    </div>
-    <a class="nav-link nav-item ml-auto d-none d-md-block" href="#section-1">Section 1</a>
-    <a class="nav-link d-none d-md-block" href="#section-2">Section 2</a>
-    <a class="nav-link d-none d-lg-block" href="#section-3">Section 3</a>
-</nav> -->
-
 {% endblock navbar %}
