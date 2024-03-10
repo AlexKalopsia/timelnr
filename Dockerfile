@@ -1,3 +1,7 @@
+# If deploying to ARM architecture, use:
+# FROM yosukeasanoflagellin/uwsgi-nginx-flask:python3.8.7
+# RUN apt-get update && apt-get install -y bash nano
+
 FROM tiangolo/uwsgi-nginx-flask:python3.8-alpine
 RUN apk --update add bash nano
 ENV STATIC_URL /static
